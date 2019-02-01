@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: MyText
+  gender: MyText
+  age: 1
+  department: MyText
+  clinical_year: MyText
+
+two:
+  user_id: MyText
+  gender: MyText
+  age: 1
+  department: MyText
+  clinical_year: MyText
