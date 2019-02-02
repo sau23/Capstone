@@ -3,13 +3,13 @@
 one:
   survey_id: false
   question_id: 1
-  user_id: MyText
+  user_id: MyString
   response: 1
   response_text: MyText
 
 two:
   survey_id: false
   question_id: 1
-  user_id: MyText
+  user_id: MyString
   response: 1
   response_text: MyText
