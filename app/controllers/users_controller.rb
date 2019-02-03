@@ -28,8 +28,11 @@ class UsersController < ApplicationController
       respond_to do |format|
         #user not yet initialized
         if User.where(user_id: params[:user_id], gender: '').count > 0
-            format.html{ redirect_to new_user_path }
-            format.js
+            @users = User.where(user_id: params[:user_id], gender: '')
+            @users.each do |user|
+                format.html{ redirect_to edit_user_path(user) }
+                format.js
+            end
         #user already initialized, completed nothing
         elsif User.where(user_id: params[:user_id], completed: '0').count > 0
             format.html{ redirect_to questions_path }
