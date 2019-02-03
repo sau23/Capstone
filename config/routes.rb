@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'users/index'
+  root 'users#index'
   resources :feedbacks
   resources :questions
   resources :responses
