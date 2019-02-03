@@ -1,13 +1,12 @@
 class CreateUsers < ActiveRecord::Migration[5.2]
   def change
-    drop_table :users
-
     create_table :users do |t|
-      t.string :user_id
-      t.string :gender
+      t.text :user_id
+      t.text :gender
       t.integer :age
-      t.string :department
-      t.string :clinical_year
+      t.text :department
+      t.text :clinical_year
+      t.integer :completed
 
       t.timestamps
     end

@@ -24,20 +24,18 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-
     if User.exists? user_id: params[:user_id]
-      render plain: 'OK'
-      #@user = User.new(user_params)
-
-      #respond_to do |format|
-      #  if @user.save
-      #    format.html { redirect_to @user, notice: 'User was successfully created.' }
-      #    format.json { render :show, status: :created, location: @user }
-      #  else
-      #    format.html { render :new }
-      #    format.json { render json: @user.errors, status: :unprocessable_entity }
-      #  end
-      #end
+      respond_to do |format|
+        #user not yet initialized
+        if User.where(user_id: params[:user_id], gender: "").count > 0
+            format.html{ redirect_to new_users_path }
+            format.js
+        #user already initialized
+        else
+            format.html{ redirect_to questions_path }
+            format.js
+        end
+      end
     else
       respond_to do |format|
         format.html { redirect_to users_path, notice: 'User does not exist' }
