@@ -25,24 +25,27 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     if User.exists? user_id: params[:user_id]
-      respond_to do |format|
         #user not yet initialized
         if User.where(user_id: params[:user_id], gender: '').count > 0
             @users = User.where(user_id: params[:user_id], gender: '')
             @users.each do |user|
-                format.html{ redirect_to edit_user_path(user) }
-                format.js
+                respond_to do |format|
+                    format.html{ redirect_to edit_user_path(user) }
+                    format.js
+                end
             end
         #user already initialized, completed nothing
         elsif User.where(user_id: params[:user_id], completed: '0').count > 0
-            format.html{ redirect_to questions_path }
-            format.js
+            #redirect_to :instructions
+            respond_to do |format|
+                #format.html{ redirect_to questions_path }
+                format.html{ render '/layouts/instructions' }
+                format.js
+            end
         #user already initialized, completed something
         else
-            format.html{ redirect_to "questions/show" }
-            format.js
+            redirect_to :controller => 'questions', :action => 'create'
         end
-      end
     else
       respond_to do |format|
         format.html { redirect_to users_path, notice: 'User does not exist' }

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Capstone</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    You will now take a survey.
+
+  </head>
+  <div>
+    <%= link_to 'Continue', questions_path %>
+  </div>
+  <body>
+    <%= yield %>
+  </body>
+</html>

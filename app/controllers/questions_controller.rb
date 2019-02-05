@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
+    #render template: "layouts/instructions" and return
     @questions = Question.all
   end
 
