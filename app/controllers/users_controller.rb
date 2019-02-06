@@ -24,7 +24,6 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    user = User.find_by(user_id: params[:user_id])
 
     # user exists in database
     if user = User.find_by(user_id: params[:user_id])
