@@ -24,33 +24,37 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    if User.exists? user_id: params[:user_id]
-        #user not yet initialized
-        if User.where(user_id: params[:user_id], gender: '').count > 0
-            @users = User.where(user_id: params[:user_id], gender: '')
-            @users.each do |user|
-                respond_to do |format|
-                    format.html{ redirect_to edit_user_path(user) }
-                    format.js
-                end
-            end
-        #user already initialized, completed nothing
-        elsif User.where(user_id: params[:user_id], completed: '0').count > 0
-            #redirect_to :instructions
+    user = User.find_by(user_id: params[:user_id])
+
+    # user exists in database
+    if user = User.find_by(user_id: params[:user_id])
+
+        # login user
+        login user
+
+        # user has not filled out info
+        if user.gender.empty?
             respond_to do |format|
-                #format.html{ redirect_to questions_path }
+                format.html{ redirect_to edit_user_path(user) }
+                format.js
+            end
+
+        # user has not yet answered a question
+        elsif user.completed == 0
+            respond_to do |format|
                 format.html{ render '/layouts/instructions' }
                 format.js
             end
-        #user already initialized, completed something
+
+        # user has answered at least one question
         else
-            redirect_to :controller => 'questions', :action => 'create'
+            redirect_to :questions
         end
+
+    # user does not exist in database
     else
-      respond_to do |format|
-        format.html { redirect_to users_path, notice: 'User does not exist' }
-        format.js
-      end
+        flash[:danger] = 'User does not exist'
+        redirect_to users_path
     end
   end
 
@@ -87,5 +91,10 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:user_id, :gender, :age, :department, :clinical_year)
+    end
+
+    # log in
+    def login(user)
+        session[:user_id] = user.id
     end
 end
