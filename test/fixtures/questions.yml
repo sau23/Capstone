@@ -4,8 +4,16 @@ one:
   survey_id: false
   question_id: 1
   question: MyText
+  option_1: MyText
+  option_2: MyText
+  option_3: MyText
+  option_4: MyText
 
 two:
   survey_id: false
   question_id: 1
   question: MyText
+  option_1: MyText
+  option_2: MyText
+  option_3: MyText
+  option_4: MyText
