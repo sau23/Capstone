@@ -6,6 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create(user_id: '001B', gender: 'm', age: '20', department: 'here', clinical_year: '1', completed: '0')
-User.create(user_id: '001C', gender: '', age: '20', department: 'here', clinical_year: '2', completed: '0')
+User.create(user_id: '001B', survey_id: 'true', gender: 'm', age: '20', department: 'here', clinical_year: '1', completed: '0')
+User.create(user_id: '001C', survey_id: 'false', gender: '', age: '20', department: 'here', clinical_year: '2', completed: '0')
 Question.create(survey_id: 'true', question_id: '0', question: 'hello', option_1: 'one', option_2: 'two', option_3: 'three', option_4: 'four')
