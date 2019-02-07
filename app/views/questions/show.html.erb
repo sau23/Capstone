@@ -1,31 +1,25 @@
 <p id="notice"><%= notice %></p>
 
-<form action="responses#create", method="POST">
-    <%= @question.survey_id %>
-    <%= @question.question_id %>
-    <%= @question.question %>
-    <%= @question.option_1%>
-    <%= @question.option_2%>
-    <%= @question.option_3%>
-    <%= @question.option_4%>
+<form action="/questions#create", method="POST">
+
+    <p><%= @question.question %></p>
+    <p>
+        <input type="radio" name="response" value="1">
+        <%= @question.option_1 %>
+    </p>
+    <p>
+        <input type="radio" name="response" value="2">
+        <%= @question.option_2 %>
+    </p>
+    <p>
+        <input type="radio" name="response" value="3">
+        <%= @question.option_3 %>
+    </p>
+    <p>
+        <input type="radio" name="response" value="4">
+        <%= @question.option_4 %>
+    </p>
+    <p><textarea name="response_text" maxlength="255" rows="5"></textarea></p>
+    <p><input type="submit" value="Submit"></p>
+
 </form>
-
-<!--
-<p>
-  <strong>Survey:</strong>
-  <%= @question.survey_id %>
-</p>
-
-<p>
-  <strong>Question:</strong>
-  <%= @question.question_id %>
-</p>
-
-<p>
-  <strong>Question:</strong>
-  <%= @question.question %>
-</p>
-
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
--->

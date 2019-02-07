@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :set_user, only: [:index]
+  before_action :set_user, only: [:index, :create]
 
   # GET /questions
   # GET /questions.json
@@ -25,17 +25,22 @@ class QuestionsController < ApplicationController
   # POST /questions
   # POST /questions.json
   def create
-    @question = Question.new(question_params)
 
-    respond_to do |format|
-      if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
-        format.json { render :show, status: :created, location: @question }
-      else
-        format.html { render :new }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
-      end
-    end
+    # find the question the user is currently reading
+    question = Question.find_by(id: session[:question_id])
+
+    # record the user's response and save it to the database
+    response = Response.new(survey_id: question.survey_id, question_id: question.question_id,
+                user_id: @user.user_id, response: params[:response], response_text: params[:response_text])
+    response.save
+
+    # set the user's flag for the specific question as complete
+    mask = @user.completed | (1 << question.question_id)
+    @user.update(completed: mask)
+ 
+    # find another question for the user
+    random(@user)
+
   end
 
   # PATCH/PUT /questions/1
@@ -84,8 +89,9 @@ class QuestionsController < ApplicationController
         total_questions = Question.all.count - 1
         
         # if user has completed all the questions
-        if user.completed >= 2**total_questions
-        
+        if user.completed >= 2**total_questions        
+            render '/layouts/finished'
+
         # user has not yet finished all the questions
         else
             num = rand(0..total_questions)
@@ -112,6 +118,7 @@ class QuestionsController < ApplicationController
             else
                 question = Question.find_by(question_id: num)
             end
+            session[:question_id] = question.id
             redirect_to question
         end
     end
