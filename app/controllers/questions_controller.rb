@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    random(@user)
   end
 
   # GET /questions/1
@@ -76,5 +76,44 @@ class QuestionsController < ApplicationController
     # check user session
     def set_user
         @user = User.find_by(id: session[:user_id])
+        session[:side] = true
     end
+
+    # find random unanswered question for user
+    def random(user)
+        total_questions = Question.all.count - 1
+        
+        # if user has completed all the questions
+        if user.completed >= 2**total_questions
+        
+        # user has not yet finished all the questions
+        else
+            num = rand(0..total_questions)
+            
+            # user has already completed this question
+            if user.completed & (1 << num) == 1
+                if session[:side]
+                    pos = 0
+                    b = 1
+                    while user.completed & b == 1
+                        b << 1
+                        pos += 1
+                    end
+                else
+                    pos = total_questions
+                    b = 1 << total_questions
+                    while user.completed & b == 1
+                        b >> 1
+                        pos -= 1
+                    end
+                end
+                session[:side] = !session[:side]
+                question = Question.find_by(question_id: pos)
+            else
+                question = Question.find_by(question_id: num)
+            end
+            redirect_to question
+        end
+    end
+
 end
