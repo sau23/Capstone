@@ -3,8 +3,10 @@ class CreateFeedbacks < ActiveRecord::Migration[5.2]
     drop_table :feedbacks
 
     create_table :feedbacks do |t|
-      t.string :user_id
-      t.text :feedback
+      t.text :user_id
+      t.integer :experience
+      t.integer :future
+      t.integer :difficulty
 
       t.timestamps
     end
