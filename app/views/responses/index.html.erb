@@ -1,35 +1,35 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Responses</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Survey</th>
-      <th>Question</th>
-      <th>User</th>
-      <th>Response</th>
-      <th>Response text</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @responses.each do |response| %>
-      <tr>
-        <td><%= response.survey_id %></td>
-        <td><%= response.question_id %></td>
-        <td><%= response.user_id %></td>
-        <td><%= response.response %></td>
-        <td><%= response.response_text %></td>
-        <td><%= link_to 'Show', response %></td>
-        <td><%= link_to 'Edit', edit_response_path(response) %></td>
-        <td><%= link_to 'Destroy', response, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Response', new_response_path %>
+<span>
+    <table class="pretty">
+        <tr>
+            <th><%= link_to "Question", :sort1 => "question_id" %></th>
+            <th><%= link_to "Response", :sort1 => "response" %></th>
+            <th><%= link_to "User", :sort1 => "user_id" %></th>
+        </tr>
+        <% @responses_g.each do |response| %>
+        <tr>
+            <td><%= response.question_id %></td>
+            <td><%= response.response %></td>
+            <td><%= response.user_id %></td>
+        </tr>
+        <% end %>
+    </table>
+</span>
+<span>
+    <table class="pretty">
+        <tr>
+            <th><%= link_to "Question", :sort2 => "question_id" %></th>
+            <th><%= link_to "Response", :sort2 => "response" %></th>
+            <th><%= link_to "User", :sort2 => "user_id" %></th>
+        </tr>
+        <% @responses_n.each do |response| %>
+        <tr>
+            <td><%= response.question_id %></td>
+            <td><%= response.response %></td>
+            <td><%= response.user_id %></td>
+        </tr>
+        <% end %>
+    </table>
+</span>

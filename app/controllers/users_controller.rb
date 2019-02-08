@@ -25,8 +25,12 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
 
+    # if admin account
+    if params[:user_id].eql? "admin"
+        redirect_to :responses
+
     # user exists in database
-    if user = User.find_by(user_id: params[:user_id])
+    elsif user = User.find_by(user_id: params[:user_id])
 
         # login user
         login user

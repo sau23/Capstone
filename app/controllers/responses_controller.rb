@@ -4,7 +4,11 @@ class ResponsesController < ApplicationController
   # GET /responses
   # GET /responses.json
   def index
-    @responses = Response.all
+    @users = User.all
+    @questions = Question.all
+    @responses_g = Response.where(survey_id: "true").order(params[:sort1])
+    @responses_n = Response.where(survey_id: "false").order(params[:sort2])
+    @feedbacks = Feedback.all
   end
 
   # GET /responses/1
@@ -24,17 +28,20 @@ class ResponsesController < ApplicationController
   # POST /responses
   # POST /responses.json
   def create
-    @response = Response.new(response_params)
 
-    respond_to do |format|
-      if @response.save
-        format.html { redirect_to @response, notice: 'Response was successfully created.' }
-        format.json { render :show, status: :created, location: @response }
-      else
-        format.html { render :new }
-        format.json { render json: @response.errors, status: :unprocessable_entity }
-      end
-    end
+    
+
+#    @response = Response.new(response_params)
+#
+#    respond_to do |format|
+#      if @response.save
+#        format.html { redirect_to @response, notice: 'Response was successfully created.' }
+#        format.json { render :show, status: :created, location: @response }
+#      else
+#        format.html { render :new }
+#        format.json { render json: @response.errors, status: :unprocessable_entity }
+#      end
+#    end
   end
 
   # PATCH/PUT /responses/1
