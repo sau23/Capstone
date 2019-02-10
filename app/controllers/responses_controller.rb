@@ -1,13 +1,14 @@
 class ResponsesController < ApplicationController
   before_action :set_response, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
   # GET /responses
   # GET /responses.json
   def index
     @users = User.all
     @questions = Question.all
-    @responses_g = Response.where(survey_id: "true").order(params[:sort1])
-    @responses_n = Response.where(survey_id: "false").order(params[:sort2])
+    @responses_g = Response.where(survey_id: "true").order(sort_column + ' ' + sort_direction)
+    @responses_n = Response.where(survey_id: "false").order(sort_column + ' ' + sort_direction)
     @feedbacks = Feedback.all
   end
 
@@ -28,8 +29,6 @@ class ResponsesController < ApplicationController
   # POST /responses
   # POST /responses.json
   def create
-
-    
 
 #    @response = Response.new(response_params)
 #
@@ -76,6 +75,14 @@ class ResponsesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def response_params
-      params.require(:response).permit(:survey_id, :question_id, :user_id, :response, :response_text)
+      params.require(:response).permit(:question_id, :user_id, :response, :response_text)
+    end
+
+    def sort_column
+        Response.column_names.include?(params[:sort]) ? params[:sort] : "question_id"
+    end
+
+    def sort_direction
+        %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

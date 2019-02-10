@@ -1,12 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Responses</h1>
+
+<p>
+    <%= link_to "New User", :create => "1" %><br>
+    <%= link_to "New Question", :create => "2" %><br>
+</p>
+
 <div>
 <table style="float: left">
     <tr>
-        <th><%= link_to "Question", :sort1 => "question_id" %></th>
-        <th><%= link_to "Response", :sort1 => "response" %></th>
-        <th><%= link_to "User", :sort1 => "user_id" %></th>
+        <th><%= sortable "question_id" %></th>
+        <th><%= sortable "response" %></th>
+        <th><%= sortable "user_id" %></th>
     </tr>
     <% @responses_g.each do |response1| %>
     <tr>
@@ -18,9 +24,9 @@
 </table>
 <table style="float: left">
     <tr>
-        <th><%= link_to "Question", :sort2 => "question_id" %></th>
-        <th><%= link_to "Response", :sort2 => "response" %></th>
-        <th><%= link_to "User", :sort2 => "user_id" %></th>
+        <th><%= sortable "question_id" %></th>
+        <th><%= sortable "response" %></th>
+        <th><%= sortable "user_id" %></th>
     </tr>
     <% @responses_n.each do |response2| %>
     <tr>

@@ -86,7 +86,7 @@ class QuestionsController < ApplicationController
 
     # find random unanswered question for user
     def random(user)
-        total_questions = Question.where(survey_id: user.survey_id).count
+        total_questions = Question.all.count
         
         # if user has completed all the questions
         if user.completed == 2**total_questions - 1
