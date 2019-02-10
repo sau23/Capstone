@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  survey_id: false
   question_id: 1
   question: MyText
   option_1: MyText
@@ -10,7 +9,6 @@ one:
   option_4: MyText
 
 two:
-  survey_id: false
   question_id: 1
   question: MyText
   option_1: MyText

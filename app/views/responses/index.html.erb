@@ -1,35 +1,33 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Responses</h1>
-<span>
-    <table class="pretty">
-        <tr>
-            <th><%= link_to "Question", :sort1 => "question_id" %></th>
-            <th><%= link_to "Response", :sort1 => "response" %></th>
-            <th><%= link_to "User", :sort1 => "user_id" %></th>
-        </tr>
-        <% @responses_g.each do |response| %>
-        <tr>
-            <td><%= response.question_id %></td>
-            <td><%= response.response %></td>
-            <td><%= response.user_id %></td>
-        </tr>
-        <% end %>
-    </table>
-</span>
-<span>
-    <table class="pretty">
-        <tr>
-            <th><%= link_to "Question", :sort2 => "question_id" %></th>
-            <th><%= link_to "Response", :sort2 => "response" %></th>
-            <th><%= link_to "User", :sort2 => "user_id" %></th>
-        </tr>
-        <% @responses_n.each do |response| %>
-        <tr>
-            <td><%= response.question_id %></td>
-            <td><%= response.response %></td>
-            <td><%= response.user_id %></td>
-        </tr>
-        <% end %>
-    </table>
-</span>
+<div>
+<table style="float: left">
+    <tr>
+        <th><%= link_to "Question", :sort1 => "question_id" %></th>
+        <th><%= link_to "Response", :sort1 => "response" %></th>
+        <th><%= link_to "User", :sort1 => "user_id" %></th>
+    </tr>
+    <% @responses_g.each do |response1| %>
+    <tr>
+        <td><%= response1.question_id + 1 %></td>
+        <td><%= response1.response %></td>
+        <td><%= response1.user_id %></td>
+    </tr>
+    <% end %>
+</table>
+<table style="float: left">
+    <tr>
+        <th><%= link_to "Question", :sort2 => "question_id" %></th>
+        <th><%= link_to "Response", :sort2 => "response" %></th>
+        <th><%= link_to "User", :sort2 => "user_id" %></th>
+    </tr>
+    <% @responses_n.each do |response2| %>
+    <tr>
+        <td><%= response2.question_id + 1 %></td>
+        <td><%= response2.response %></td>
+        <td><%= response2.user_id %></td>
+    </tr>
+    <% end %>
+</table>
+</div>

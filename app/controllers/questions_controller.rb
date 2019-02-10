@@ -30,7 +30,7 @@ class QuestionsController < ApplicationController
     question = Question.find_by(id: session[:question_id])
 
     # record the user's response and save it to the database
-    response = Response.new(survey_id: question.survey_id, question_id: question.question_id,
+    response = Response.new(survey_id: @user.survey_id, question_id: question.question_id,
                 user_id: @user.user_id, response: params[:response], response_text: params[:response_text])
     response.save
 
@@ -86,15 +86,15 @@ class QuestionsController < ApplicationController
 
     # find random unanswered question for user
     def random(user)
-        total_questions = Question.all.count - 1
+        total_questions = Question.where(survey_id: user.survey_id).count
         
         # if user has completed all the questions
-        if user.completed >= 2**total_questions        
+        if user.completed == 2**total_questions - 1
             render '/layouts/finished'
 
         # user has not yet finished all the questions
         else
-            num = rand(0..total_questions)
+            num = rand(0..total_questions - 1)
             
             # user has already completed this question
             if user.completed & (1 << num) == 1
@@ -106,8 +106,8 @@ class QuestionsController < ApplicationController
                         pos += 1
                     end
                 else
-                    pos = total_questions
-                    b = 1 << total_questions
+                    pos = total_questions - 1
+                    b = 1 << total_questions - 1
                     while user.completed & b == 1
                         b >> 1
                         pos -= 1
