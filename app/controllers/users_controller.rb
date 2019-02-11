@@ -37,27 +37,15 @@ class UsersController < ApplicationController
 
         # user has not filled out info
         if user.gender.empty?
-            respond_to do |format|
-                format.html{ redirect_to edit_user_path(user) }
-                format.js
-            end
-
-        # user has not yet answered a question
-        elsif user.completed == 0
-            respond_to do |format|
-                format.html{ render '/layouts/instructions' }
-                format.js
-            end
-
-        # user has answered at least one question
+            redirect_to edit_user_path(user)
         else
-            redirect_to :questions
+            redirect_to '/questions/survey'
         end
 
     # user does not exist in database
     else
         flash[:danger] = 'User does not exist'
-        redirect_to users_path
+        redirect_to :root
     end
   end
 
@@ -83,6 +71,10 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # GET /users/login
+  def login
   end
 
   private

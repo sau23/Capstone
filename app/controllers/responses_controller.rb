@@ -41,6 +41,7 @@ class ResponsesController < ApplicationController
 #        format.json { render json: @response.errors, status: :unprocessable_entity }
 #      end
 #    end
+
   end
 
   # PATCH/PUT /responses/1

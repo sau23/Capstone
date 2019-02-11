@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<form action="/questions#create", method="POST">
+
+    <p><%= @question.question %></p>
+    <p>
+        <input type="radio" name="response" value="1">
+        <%= @question.option_1 %>
+    </p>
+    <p>
+        <input type="radio" name="response" value="2">
+        <%= @question.option_2 %>
+    </p>
+    <p>
+        <input type="radio" name="response" value="3">
+        <%= @question.option_3 %>
+    </p>
+    <p>
+        <input type="radio" name="response" value="4">
+        <%= @question.option_4 %>
+    </p>
+    <p><textarea name="response_text" maxlength="255" rows="5"></textarea></p>
+    <p><input type="submit" value="Submit"></p>
+
+</form>

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  get 'users/index'
-  root 'users#index'
+  get 'questions/survey'
+  get 'users/login'
+  root 'users#login'
   resources :feedbacks
   resources :questions
   resources :responses

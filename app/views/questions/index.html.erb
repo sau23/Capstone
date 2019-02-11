@@ -2,9 +2,6 @@
 
 <h1>Questions</h1>
 
-<%= @user.user_id %>
-
-<!--
 <table>
   <thead>
     <tr>
@@ -18,7 +15,6 @@
   <tbody>
     <% @questions.each do |question| %>
       <tr>
-        <td><%= question.survey_id %></td>
         <td><%= question.question_id %></td>
         <td><%= question.question %></td>
         <td><%= link_to 'Show', question %></td>
@@ -32,4 +28,4 @@
 <br>
 
 <%= link_to 'New Question', new_question_path %>
--->
+

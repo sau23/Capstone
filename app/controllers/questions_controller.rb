@@ -1,11 +1,11 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :set_user, only: [:index, :create]
+  before_action :set_user, only: [:index, :create, :survey]
 
   # GET /questions
   # GET /questions.json
   def index
-    random(@user)
+    @questions = Question.all
   end
 
   # GET /questions/1
@@ -35,11 +35,10 @@ class QuestionsController < ApplicationController
     response.save
 
     # set the user's flag for the specific question as complete
-    mask = @user.completed | (1 << question.question_id)
-    @user.update(completed: mask)
+    @user.update(completed: @user.completed | (1 << question.question_id))
  
     # find another question for the user
-    random(@user)
+    redirect_to '/questions/survey' and return
 
   end
 
@@ -65,6 +64,11 @@ class QuestionsController < ApplicationController
       format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # GET /questions/survey
+  def survey
+    random(@user)
   end
 
   private
@@ -97,29 +101,28 @@ class QuestionsController < ApplicationController
             num = rand(0..total_questions - 1)
             
             # user has already completed this question
-            if user.completed & (1 << num) == 1
+            if (user.completed >> (total_questions - num)) & 1 == 1
                 if session[:side]
                     pos = 0
-                    b = 1
-                    while user.completed & b == 1
-                        b << 1
+                    b = user.completed
+                    while (b & 1) == 1
+                        b >>= 1
                         pos += 1
                     end
                 else
                     pos = total_questions - 1
-                    b = 1 << total_questions - 1
-                    while user.completed & b == 1
-                        b >> 1
+                    b = user.completed.to_s(2).reverse!.to_i(2)
+                    while (b & 1) == 1
+                        b >>= 1
                         pos -= 1
                     end
                 end
                 session[:side] = !session[:side]
-                question = Question.find_by(question_id: pos)
+                @question = Question.find_by(question_id: pos)
             else
-                question = Question.find_by(question_id: num)
+                @question = Question.find_by(question_id: num)
             end
-            session[:question_id] = question.id
-            redirect_to question
+            session[:question_id] = @question.id
         end
     end
 
