@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    @user = User.new
   end
 
   # GET /users/1
@@ -15,7 +16,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
+    #@user = User.new
   end
 
   # GET /users/1/edit
@@ -45,8 +46,16 @@ class UsersController < ApplicationController
 
     # user does not exist in database
     else
-        flash[:danger] = 'User does not exist'
-        redirect_to :root
+        if params[:completed].to_i < 0
+            user = User.new(user_id: make_user, survey_id: params[:user][:survey_id], gender: "",
+                    age: 0, department: "", clinical_year: "", completed: 0)
+            user.save
+            flash[:success]
+            redirect_to :users, notice: 'User ' + user.user_id + ' created'
+        else
+            flash[:danger] = 'User does not exist'
+            redirect_to :root
+        end
     end
   end
 
@@ -93,4 +102,11 @@ class UsersController < ApplicationController
     def login(user)
         session[:user_id] = user.id
     end
+
+    # create new random user string
+    def make_user
+        require 'securerandom'
+        SecureRandom.hex(10)[0, 8]
+    end
+
 end
