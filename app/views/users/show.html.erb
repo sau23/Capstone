@@ -25,5 +25,26 @@
   <%= @user.clinical_year %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<table>
+    <thead>
+        <tr>
+            <th>Feedback</th>
+            <th>Experience</th>
+            <th>Future</th>
+            <th>Difficulty</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @feedbacks.each do |feedback| %>
+            <tr>
+                <td><%= feedback.feedback %></td>
+                <td><%= feedback.experience %></td>
+                <td><%= feedback.future %></td>
+                <td><%= feedback.difficulty %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
 <%= link_to 'Back', users_path %>

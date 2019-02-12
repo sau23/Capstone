@@ -7,8 +7,11 @@
     <tr>
       <th>Survey</th>
       <th>Question</th>
-      <th>Question</th>
-      <th colspan="3"></th>
+      <th>Option 1</th>
+      <th>Option 2</th>
+      <th>Option 3</th>
+      <th>Option 4</th>
+      <th colspan="5"></th>
     </tr>
   </thead>
 
@@ -17,6 +20,10 @@
       <tr>
         <td><%= question.question_id %></td>
         <td><%= question.question %></td>
+        <td><%= question.option_1 %></td>
+        <td><%= question.option_2 %></td>
+        <td><%= question.option_3 %></td>
+        <td><%= question.option_4 %></td>
         <td><%= link_to 'Show', question %></td>
         <td><%= link_to 'Edit', edit_question_path(question) %></td>
         <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>

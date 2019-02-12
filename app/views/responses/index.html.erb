@@ -3,8 +3,9 @@
 <h1>Responses</h1>
 
 <p>
-    <%= link_to "New User", '/users/new' %><br>
-    <%= link_to "New Question", '/questions/new' %><br>
+    <%= link_to "Show Users", :users %><br>
+    <%= link_to "New User", :new_user %><br>
+    <%= link_to "New Question", :new_question %><br>
 </p>
 
 <div>
@@ -19,20 +20,6 @@
         <td><%= response1.question_id + 1 %></td>
         <td><%= response1.response %></td>
         <td><%= response1.user_id %></td>
-    </tr>
-    <% end %>
-</table>
-<table style="float: left">
-    <tr>
-        <th><%= sortable "question_id" %></th>
-        <th><%= sortable "response" %></th>
-        <th><%= sortable "user_id" %></th>
-    </tr>
-    <% @responses_n.each do |response2| %>
-    <tr>
-        <td><%= response2.question_id + 1 %></td>
-        <td><%= response2.response %></td>
-        <td><%= response2.user_id %></td>
     </tr>
     <% end %>
 </table>

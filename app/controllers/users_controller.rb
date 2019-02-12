@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @feedbacks = Feedback.where(user_id: @user.user_id)
   end
 
   # GET /users/new
