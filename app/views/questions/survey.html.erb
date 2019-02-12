@@ -20,6 +20,10 @@
         <%= @question.option_4 %>
     </p>
     <p><textarea name="response_text" maxlength="255" rows="5"></textarea></p>
-    <p><input type="submit" value="Submit"></p>
+    <p><input type="submit" value="Continue"></p>
 
 </form>
+
+<% if @user.completed > 0 %>
+    <%= link_to 'Save and Exit', :new_feedback, data: { confirm: "Are you sure?" } %>
+<% end %>

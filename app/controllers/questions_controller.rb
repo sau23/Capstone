@@ -68,6 +68,8 @@ class QuestionsController < ApplicationController
 
   # GET /questions/survey
   def survey
+    if @user.completed == 0
+    end
     random(@user)
   end
 
@@ -101,7 +103,7 @@ class QuestionsController < ApplicationController
             num = rand(0..total_questions - 1)
             
             # user has already completed this question
-            if (user.completed >> (total_questions - num)) & 1 == 1
+            if (user.completed >> num) & 1 == 1
                 if session[:side]
                     pos = 0
                     b = user.completed
