@@ -6,6 +6,7 @@ class QuestionsController < ApplicationController
   # GET /questions.json
   def index
     @questions = Question.all
+    @question = Question.new
   end
 
   # GET /questions/1
@@ -26,20 +27,38 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
 
-    # find the question the user is currently reading
-    question = Question.find_by(id: session[:question_id])
+    # if admin is creating a new question
+    if params[:new].to_i == 1
+        q = Question.new(question_id: params[:question][:question_id], to_ask: params[:question][:to_ask], option_1: params[:question][:option_1],
+                    option_2: params[:question][:option_2], option_3: params[:question][:option_3], option_4: params[:question][:option_4])
 
-    # record the user's response and save it to the database
-    response = Response.new(survey_id: @user.survey_id, question_id: question.question_id,
+        respond_to do |format|
+            # pass through validation
+            if q.save
+                format.html { redirect_to index, notice: 'Question was successfully updated.' }
+                format.js
+            else
+                format.html { redirect_to index }
+                format.json { render json: @q.errors, status: :unprocessable_entity }
+            end
+        end
+    else
+
+        # find the question the user is currently reading
+        question = Question.find_by(id: session[:question_id])
+
+        # record the user's response and save it to the database
+        response = Response.new(survey_id: @user.survey_id, question_id: question.question_id,
                 user_id: @user.user_id, response: params[:response], response_text: params[:response_text])
-    response.save
+        response.save
 
-    # set the user's flag for the specific question as complete
-    @user.update(completed: @user.completed | (1 << question.question_id))
+        # set the user's flag for the specific question as complete
+        @user.update(completed: @user.completed | (1 << question.question_id))
  
-    # find another question for the user
-    redirect_to '/questions/survey' and return
+        # find another question for the user
+        redirect_to '/questions/survey' and return
 
+    end
   end
 
   # PATCH/PUT /questions/1

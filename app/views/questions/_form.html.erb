@@ -12,11 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :survey_id %>
-    <%= form.check_box :survey_id %>
-  </div>
-
-  <div class="field">
     <%= form.label :question_id %>
     <%= form.number_field :question_id %>
   </div>
@@ -25,6 +20,28 @@
     <%= form.label :question %>
     <%= form.text_area :question %>
   </div>
+
+  <div class="field">
+    <%= form.label :option_1 %>
+    <%= form.text_area :option_1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :option_2 %>
+    <%= form.text_area :option_2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :option_3 %>
+    <%= form.text_area :option_3 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :option_4 %>
+    <%= form.text_area :option_4 %>
+  </div>
+
+  <%= hidden_field_tag 'new', 1 %>
 
   <div class="actions">
     <%= form.submit %>

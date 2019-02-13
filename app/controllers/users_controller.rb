@@ -40,18 +40,24 @@ class UsersController < ApplicationController
         # user has not filled out info
         if user.gender.empty?
             redirect_to edit_user_path(user)
+
+        # user has filled out info
         else
             redirect_to '/questions/survey'
         end
 
     # user does not exist in database
     else
+
+        # make a new user if submitting form
         if params[:completed].to_i < 0
             user = User.new(user_id: make_user, survey_id: params[:user][:survey_id], gender: "",
                     age: 0, department: "", clinical_year: "", completed: 0)
-            user.save
+            user.save(:validate => false)
             flash[:success]
             redirect_to :users, notice: 'User ' + user.user_id + ' created'
+        
+        # attempt to login the user from login page
         else
             flash[:danger] = 'User does not exist'
             redirect_to :root
@@ -64,8 +70,9 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
+        format.html { redirect_to :root, notice: 'User was sucessfully updated' }
+        #format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        #format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }

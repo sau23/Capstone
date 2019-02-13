@@ -7,8 +7,7 @@
     <%= link_to "Show Questions", :questions %><br>
 </p>
 
-<div>
-<table style="float: left">
+<table>
     <tr>
         <th><%= sortable "question_id" %></th>
         <th><%= sortable "response" %></th>
@@ -22,4 +21,8 @@
     </tr>
     <% end %>
 </table>
-</div>
+
+<br>
+
+<%= link_to "Home", :root %>
+

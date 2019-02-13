@@ -2,7 +2,7 @@
 
 <form action="/questions#create", method="POST">
 
-    <p><%= @question.question %></p>
+    <p><%= @question.to_ask %></p>
     <p>
         <input type="radio" name="response" value="1">
         <%= @question.option_1 %>

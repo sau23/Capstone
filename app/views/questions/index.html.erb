@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>Survey</th>
+      <th>Question ID</th>
       <th>Question</th>
       <th>Option 1</th>
       <th>Option 2</th>
@@ -19,7 +19,7 @@
     <% @questions.each do |question| %>
       <tr>
         <td><%= question.question_id %></td>
-        <td><%= question.question %></td>
+        <td><%= question.to_ask %></td>
         <td><%= question.option_1 %></td>
         <td><%= question.option_2 %></td>
         <td><%= question.option_3 %></td>
@@ -34,5 +34,56 @@
 
 <br>
 
-<%= link_to 'New Question', new_question_path %>
+<%= form_with(model: @question, local: true) do |form| %>
+    
+    <% if @question.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+            <ul>
+            <% @question.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+        <%= form.label :question_id %>
+        <%= form.number_field :question_id %>
+    </div>
+
+    <div class="field">
+        <%= form.label :question %>
+        <%= form.text_area :to_ask %>
+    </div>
+
+    <div class="field">
+        <%= form.label :option_1 %>
+        <%= form.text_area :option_1 %>
+    </div>
+
+    <div class="field">
+        <%= form.label :option_2 %>
+        <%= form.text_area :option_2 %>
+    </div>
+
+    <div class="field">
+        <%= form.label :option_3 %>
+        <%= form.text_area :option_3 %>
+    </div>
+
+    <div class="field">
+        <%= form.label :option_4 %>
+        <%= form.text_area :option_4 %>
+    </div>
+
+    <%= hidden_field_tag 'new', 1 %>
+
+    <div class="actions">
+        <%= form.submit %>
+    </div>
+<% end %>
+
+<%= link_to 'Back', :responses %>
 

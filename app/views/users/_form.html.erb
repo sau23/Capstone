@@ -12,13 +12,14 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div class="field">
     <%= form.label :gender %>
-    <%= form.text_field :gender %>
+    <%= form.select :gender, 
+        [
+            'M', 
+            'F', 
+            'Other'
+        ], 
+        :include_blank => 'Please Select an Option' %>
   </div>
 
   <div class="field">
@@ -28,12 +29,27 @@
 
   <div class="field">
     <%= form.label :department %>
-    <%= form.text_field :department %>
+    <%= form.select :department, 
+        [
+            'Emergency Department', 
+            'Intensive Care Unit: Step Down', 
+            'Intensive Care Unit: Floor'
+        ], 
+        :include_blank => 'Please Select an Option' %>
   </div>
 
   <div class="field">
     <%= form.label :clinical_year %>
-    <%= form.text_field :clinical_year %>
+    <%= form.select :clinical_year, 
+        [
+            'PGY1', 
+            'PGY2',
+            'PGY3', 
+            'PGY4', 
+            'PGY5', 
+            'Attending'
+        ], 
+        :include_blank => 'Please Select an Option' %>
   </div>
 
   <div class="actions">
