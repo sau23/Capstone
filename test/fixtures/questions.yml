@@ -2,7 +2,7 @@
 
 one:
   question_id: 1
-  question: MyText
+  to_ask: MyText
   option_1: MyText
   option_2: MyText
   option_3: MyText
@@ -10,7 +10,7 @@ one:
 
 two:
   question_id: 1
-  question: MyText
+  to_ask: MyText
   option_1: MyText
   option_2: MyText
   option_3: MyText
