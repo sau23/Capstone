@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :log_out, only: [:login]
+  before_action :logged_in?, only: [:edit, :update]
+  before_action :admin?, only: [:index, :show, :new, :destroy]
 
   # GET /users
   # GET /users.json
@@ -16,7 +19,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    #@user = User.new
+    @user = User.new
   end
 
   # GET /users/1/edit
@@ -29,13 +32,14 @@ class UsersController < ApplicationController
 
     # if admin account
     if params[:user_id].eql? "admin"
+        session[:admin] = true
         redirect_to :responses
 
     # user exists in database
     elsif user = User.find_by(user_id: params[:user_id])
 
         # login user
-        login user
+        log_in user
 
         # user has not filled out info
         if user.gender.empty?
@@ -103,11 +107,6 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:user_id, :gender, :age, :department, :clinical_year)
-    end
-
-    # log in
-    def login(user)
-        session[:user_id] = user.id
     end
 
     # create new random user string

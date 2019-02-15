@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :set_user, only: [:index, :create, :survey]
+  before_action :logged_in?, only: [:create, :survey]
+  before_action :admin?, except: [:create, :survey]
 
   # GET /questions
   # GET /questions.json
@@ -48,12 +49,12 @@ class QuestionsController < ApplicationController
         question = Question.find_by(id: session[:question_id])
 
         # record the user's response and save it to the database
-        response = Response.new(survey_id: @user.survey_id, question_id: question.question_id,
-                user_id: @user.user_id, response: params[:response], response_text: params[:response_text])
+        response = Response.new(survey_id: @current_user.survey_id, question_id: question.question_id,
+                user_id: @current_user.user_id, response: params[:response], response_text: params[:response_text])
         response.save
 
         # set the user's flag for the specific question as complete
-        @user.update(completed: @user.completed | (1 << question.question_id))
+        @current_user.update(completed: @current_user.completed | (1 << question.question_id))
  
         # find another question for the user
         redirect_to '/questions/survey' and return
@@ -87,9 +88,10 @@ class QuestionsController < ApplicationController
 
   # GET /questions/survey
   def survey
-    if @user.completed == 0
+    if @current_user.completed == 0
+        # TODO: instructions page
     end
-    random(@user)
+    random(@current_user)
   end
 
   private
@@ -101,12 +103,6 @@ class QuestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:survey_id, :question_id, :question)
-    end
-
-    # check user session
-    def set_user
-        @user = User.find_by(id: session[:user_id])
-        session[:side] = true
     end
 
     # find random unanswered question for user

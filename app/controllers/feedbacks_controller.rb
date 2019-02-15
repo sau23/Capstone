@@ -1,5 +1,7 @@
 class FeedbacksController < ApplicationController
   before_action :set_feedback, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in?, only: [:new, :create]
+  before_action :admin?, except: [:new, :create]
 
   # GET /feedbacks
   # GET /feedbacks.json

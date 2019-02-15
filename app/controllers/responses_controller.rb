@@ -1,5 +1,6 @@
 class ResponsesController < ApplicationController
   before_action :set_response, only: [:show, :edit, :update, :destroy]
+  before_action :admin?
   helper_method :sort_column, :sort_direction
 
   # GET /responses
@@ -79,6 +80,7 @@ class ResponsesController < ApplicationController
       params.require(:response).permit(:question_id, :user_id, :response, :response_text)
     end
 
+    # table sorting helpers
     def sort_column
         Response.column_names.include?(params[:sort]) ? params[:sort] : "question_id"
     end
