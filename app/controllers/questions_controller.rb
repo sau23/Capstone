@@ -51,13 +51,20 @@ class QuestionsController < ApplicationController
         # record the user's response and save it to the database
         response = Response.new(survey_id: @current_user.survey_id, question_id: question.question_id,
                 user_id: @current_user.user_id, response: params[:response], response_text: params[:response_text])
-        response.save
 
-        # set the user's flag for the specific question as complete
-        @current_user.update(completed: @current_user.completed | (1 << question.question_id))
- 
-        # find another question for the user
-        redirect_to '/questions/survey' and return
+        # check if the user has selected an option
+        if response.save
+
+            # set the user's flag for the specific question as complete
+            @current_user.update(completed: @current_user.completed | (1 << question.question_id))
+
+            # find another question for the user
+            redirect_to '/questions/survey' and return
+
+        # otherwise do not continue or mark question as completed
+        else
+            flash.now[:danger] = 'Please select an option'
+        end
 
     end
   end
