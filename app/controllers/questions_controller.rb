@@ -34,6 +34,7 @@ class QuestionsController < ApplicationController
                     option_2: params[:question][:option_2], option_3: params[:question][:option_3], option_4: params[:question][:option_4])
 
         respond_to do |format|
+
             # pass through validation
             if q.save
                 format.html { redirect_to index, notice: 'Question was successfully updated.' }
@@ -41,12 +42,13 @@ class QuestionsController < ApplicationController
             else
                 format.html { redirect_to index }
                 format.json { render json: @q.errozrs, status: :unprocessable_entity }
+
             end
         end
     else
 
         # find the question the user is currently reading
-        question = Question.find_by(id: session[:question_id])
+        question = Question.find_by(question_id: cookies.signed[@current_user.user_id])
 
         # record the user's response and save it to the database
         response = Response.new(survey_id: @current_user.survey_id, question_id: question.question_id,
@@ -57,6 +59,9 @@ class QuestionsController < ApplicationController
 
             # set the user's flag for the specific question as complete
             @current_user.update(completed: @current_user.completed | (1 << question.question_id))
+
+            # delete the question id from cookie sorage
+            cookies.delete(@current_user.user_id)
 
             # find another question for the user
             redirect_to '/questions/survey' and return
@@ -93,13 +98,26 @@ class QuestionsController < ApplicationController
     end
   end
 
+  # GET /questions/confirmation
+  def confirmation
+  end
+
+  # GET /questions/instructions
+  def instructions
+  end
+
   # GET /questions/survey
   def survey
-    if @current_user.completed == 0
-        # TODO: instructions page
-    end
+
+    # check if the user already has a cookie for their last saved question
+    next_question = cookies.signed[@current_user.user_id] ? cookies.signed[@current_user.user_id] : random(@current_user)
+
+    # calculate point totals for the user
     calculate
-    random(@current_user)
+
+    # set the question for the user
+    @question = Question.find_by(question_id: next_question)
+
   end
 
   private
@@ -144,11 +162,12 @@ class QuestionsController < ApplicationController
                     end
                 end
                 session[:side] = !session[:side]
-                @question = Question.find_by(question_id: pos)
+                ret = pos
             else
-                @question = Question.find_by(question_id: num)
+                ret = num
             end
-            session[:question_id] = @question.id
+            cookies.signed[@current_user.user_id] = ret
+            ret
         end
     end
 

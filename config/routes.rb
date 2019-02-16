@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'questions/confirmation'
+  get 'questions/instructions'
   get 'questions/survey'
   get 'users/login'
   root 'users#login'
