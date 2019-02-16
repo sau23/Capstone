@@ -7,6 +7,10 @@
 
     You have finished the survey.
 
+    <% if @current_user.survey_id %>
+    You earned <%= @user_point_total %> points.
+    <% end %>
+
   </head>
 
   <body>

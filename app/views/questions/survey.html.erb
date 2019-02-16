@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<% if @current_user.survey_id %>
+Your point total is: <%= @user_point_total %>
+<% end %>
+
 <form action="/questions#create", method="POST">
 
     <p><%= @question.to_ask %></p>

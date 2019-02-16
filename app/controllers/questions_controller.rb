@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in?, only: [:create, :survey]
+  before_action :logged_in?, only: [:survey]
   before_action :admin?, except: [:create, :survey]
 
   # GET /questions
@@ -40,7 +40,7 @@ class QuestionsController < ApplicationController
                 format.js
             else
                 format.html { redirect_to index }
-                format.json { render json: @q.errors, status: :unprocessable_entity }
+                format.json { render json: @q.errozrs, status: :unprocessable_entity }
             end
         end
     else
@@ -91,6 +91,7 @@ class QuestionsController < ApplicationController
     if @current_user.completed == 0
         # TODO: instructions page
     end
+    calculate
     random(@current_user)
   end
 
@@ -111,6 +112,7 @@ class QuestionsController < ApplicationController
         
         # if user has completed all the questions
         if user.completed == 2**total_questions - 1
+            calculate
             render '/layouts/finished'
 
         # user has not yet finished all the questions
@@ -141,6 +143,13 @@ class QuestionsController < ApplicationController
             end
             session[:question_id] = @question.id
         end
+    end
+
+    # calculate how many points the user currently has
+    def calculate
+        user_responses = Response.where(user_id: @current_user.user_id)
+        @user_point_total = (user_responses.where("length(response_text) >= 40").count + 
+                            @current_user.completed.to_s(2).scan(/1/).count) * 2
     end
 
 end
