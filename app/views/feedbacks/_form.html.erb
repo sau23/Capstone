@@ -11,15 +11,61 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
+  <br>How would you rate your experience?<br>
+  <table>
+    <tr>
+      <td><%= label_tag(:experience_1, "1") %></td>
+      <td><%= label_tag(:experience_2, "2") %></td>
+      <td><%= label_tag(:experience_3, "3") %></td>
+      <td><%= label_tag(:experience_4, "4") %></td>
+      <td><%= label_tag(:experience_5, "5") %></td>
+    </tr>
+    <tr>
+      <td><%= radio_button_tag(:experience, "1") %></td>
+      <td><%= radio_button_tag(:experience, "2") %></td>
+      <td><%= radio_button_tag(:experience, "3") %></td>
+      <td><%= radio_button_tag(:experience, "4") %></td>
+      <td><%= radio_button_tag(:experience, "5") %></td>
+    </tr>
+  </table>
 
-  <div class="field">
-    <%= form.label :feedback %>
-    <%= form.text_area :feedback %>
-  </div>
+  <br>Would you be more willing to partake in surveys like this in the future?<br>
+  <table>
+    <tr>
+      <td><%= label_tag(:future_1, "1") %></td>
+      <td><%= label_tag(:future_2, "2") %></td>
+      <td><%= label_tag(:future_3, "3") %></td>
+      <td><%= label_tag(:future_4, "4") %></td>
+      <td><%= label_tag(:future_5, "5") %></td>
+    </tr>
+    <tr>
+      <td><%= radio_button_tag(:future, "1") %></td>
+      <td><%= radio_button_tag(:future, "2") %></td>
+      <td><%= radio_button_tag(:future, "3") %></td>
+      <td><%= radio_button_tag(:future, "4") %></td>
+      <td><%= radio_button_tag(:future, "5") %></td>
+    </tr>
+  </table>
+
+  <br>How difficult did you find this survey?<br>
+  <table>
+    <tr>
+      <td><%= label_tag(:difficulty_1, "1") %></td>
+      <td><%= label_tag(:difficulty_2, "2") %></td>
+      <td><%= label_tag(:difficulty_3, "3") %></td>
+      <td><%= label_tag(:difficulty_4, "4") %></td>
+      <td><%= label_tag(:difficulty_5, "5") %></td>
+    </tr>
+    <tr>
+      <td><%= radio_button_tag(:difficulty, "1") %></td>
+      <td><%= radio_button_tag(:difficulty, "2") %></td>
+      <td><%= radio_button_tag(:difficulty, "3") %></td>
+      <td><%= radio_button_tag(:difficulty, "4") %></td>
+      <td><%= radio_button_tag(:difficulty, "5") %></td>
+    </tr>
+  </table>
+
+  <br>
 
   <div class="actions">
     <%= form.submit %>
