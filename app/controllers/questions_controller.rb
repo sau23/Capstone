@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in?, only: [:survey]
-  before_action :admin?, except: [:create, :survey]
+  before_action :logged_in?, only: [:survey, :instructions, :confirmation]
+  before_action :admin?, except: [:create, :survey, :instructions, :confirmation]
 
   # GET /questions
   # GET /questions.json

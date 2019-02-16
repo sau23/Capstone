@@ -1,38 +1,5 @@
-<p id="notice"><%= notice %></p>
-
-<% flash.each do |key,value| %>
-    <div class="alert alert-<%= key %>"><%= value %></div>
-<% end %>
-
-<% if @current_user.survey_id %>
-Your point total is: <%= @user_point_total %>
-<% end %>
-
-<form action="/questions#create", method="POST">
-
-    <p><%= @question.to_ask %></p>
-    <p>
-        <input type="radio" name="response" value="1">
-        <%= @question.option_1 %>
-    </p>
-    <p>
-        <input type="radio" name="response" value="2">
-        <%= @question.option_2 %>
-    </p>
-    <p>
-        <input type="radio" name="response" value="3">
-        <%= @question.option_3 %>
-    </p>
-    <p>
-        <input type="radio" name="response" value="4">
-        <%= @question.option_4 %>
-    </p>
-    <p><textarea name="response_text" maxlength="255" rows="5"></textarea></p>
-    <p><input type="submit" value="Continue"></p>
-
-</form>
+This is the instructions page.
 
 <br>
 
-<%= link_to 'Save and Exit', :new_feedback, data: { confirm: "Are you sure?" } %>
-
+<%= link_to "Continue", '/questions/survey' %>

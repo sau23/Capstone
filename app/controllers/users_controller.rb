@@ -45,7 +45,11 @@ class UsersController < ApplicationController
         if user.gender.empty?
             redirect_to edit_user_path(user)
 
-        # user has filled out info
+        # user has not completed anything
+        elsif user.completed == 0
+            redirect_to '/questions/instructions'
+
+        # user has completed something
         else
             redirect_to '/questions/survey'
         end
