@@ -1,5 +1,12 @@
 Are you sure?
 
+<% if @current_user.survey_id %>
+<br>You currently have <%= @user_point_total %> points.
+<br>Your team currently has <%= @team_point_total %> points in total.
+<%= pie_chart [["Emergency Department", @ed_point_total], ["Intensive Care Unit", @icu_point_total]], 
+    library: {pieSliceText: "value-and-percentage"} %>
+<% end %>
+
 <br><%= link_to 'Return', '/questions/survey' %>
 <br><%= link_to 'Exit', :new_feedback %>
 

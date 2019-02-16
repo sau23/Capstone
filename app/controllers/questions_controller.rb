@@ -100,6 +100,13 @@ class QuestionsController < ApplicationController
 
   # GET /questions/confirmation
   def confirmation
+
+    # calculate corresponding point totals
+    @user_point_total = calculate_user(@current_user)
+    @ed_point_total = calculate_all("Emergency Department")
+    @icu_point_total = calculate_all("Intensive Care Unit")
+    @team_point_total = @current_user.department.eql?("Emergency Department") ? @ed_point_total : @icu_point_total
+
   end
 
   # GET /questions/instructions
@@ -113,7 +120,7 @@ class QuestionsController < ApplicationController
     next_question = cookies.signed[@current_user.user_id] ? cookies.signed[@current_user.user_id] : random(@current_user)
 
     # calculate point totals for the user
-    calculate
+    @user_point_total = calculate_user(@current_user)
 
     # set the question for the user
     @question = Question.find_by(question_id: next_question)
@@ -171,11 +178,19 @@ class QuestionsController < ApplicationController
         end
     end
 
-    # calculate how many points the user currently has
-    def calculate
-        user_responses = Response.where(user_id: @current_user.user_id)
-        @user_point_total = (user_responses.where("length(response_text) >= 40").count + 
-                            @current_user.completed.to_s(2).scan(/1/).count) * 2
+    # calculate how many points a given user currently has
+    def calculate_user(user)
+        user_responses = Response.where(user_id: user.user_id)
+        (user_responses.where("length(response_text) >= 40").count + user.completed.to_s(2).scan(/1/).count) * 2
     end
 
+    # calculate all the points accumulated by a given department
+    def calculate_all(dept)
+        select_dept = User.where(department: dept)
+        ret = 0
+        select_dept.each do |user|
+            ret += calculate_user(user)
+        end
+        ret
+    end
 end
