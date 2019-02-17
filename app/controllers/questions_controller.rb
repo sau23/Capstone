@@ -188,8 +188,7 @@ class QuestionsController < ApplicationController
 
     # calculate all the points accumulated by a given department
     def calculate_all(dept)
-        select_dept = User.where(department: dept)
-        # TODO: only select gamified entries
+        select_dept = User.where(is_gamified: true, department: dept)
         ret = 0
         select_dept.each do |user|
             ret += calculate_user(user)
