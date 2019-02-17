@@ -4,11 +4,13 @@ class CreateUsers < ActiveRecord::Migration[5.2]
 
     create_table :users do |t|
       t.text :user_id
-      t.boolean :survey_id
-      t.text :gender
+      t.boolean :is_gamified
       t.integer :age
+      t.text :gender
       t.text :department
-      t.text :clinical_year
+      t.text :is_surgical_specialist
+      t.text :role
+      t.text :years_worked
       t.integer :completed
 
       t.timestamps

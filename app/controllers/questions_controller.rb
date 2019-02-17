@@ -30,8 +30,9 @@ class QuestionsController < ApplicationController
 
     # if admin is creating a new question
     if params[:new].to_i == 1
-        q = Question.new(question_id: params[:question][:question_id], to_ask: params[:question][:to_ask], option_1: params[:question][:option_1],
-                    option_2: params[:question][:option_2], option_3: params[:question][:option_3], option_4: params[:question][:option_4])
+        q = Question.new(question_id: params[:question][:question_id], to_ask: params[:question][:to_ask], 
+                        option_1: params[:question][:option_1], option_2: params[:question][:option_2], 
+                        option_3: params[:question][:option_3])
 
         respond_to do |format|
 
@@ -41,7 +42,7 @@ class QuestionsController < ApplicationController
                 format.js
             else
                 format.html { redirect_to index }
-                format.json { render json: @q.errozrs, status: :unprocessable_entity }
+                format.json { render json: @q.errors, status: :unprocessable_entity }
 
             end
         end
@@ -51,8 +52,9 @@ class QuestionsController < ApplicationController
         question = Question.find_by(question_id: cookies.signed[@current_user.user_id])
 
         # record the user's response and save it to the database
-        response = Response.new(survey_id: @current_user.survey_id, question_id: question.question_id,
-                user_id: @current_user.user_id, response: params[:response], response_text: params[:response_text])
+        response = Response.new(question_id: question.question_id, user_id: @current_user.user_id, 
+                    is_gamified: @current_user.is_gamified, selection: params[:selection], 
+                    response_text: params[:response_text])
 
         # check if the user has selected an option
         if response.save
@@ -135,7 +137,7 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:survey_id, :question_id, :question)
+      params.require(:question).permit(:is_gamified, :question_id, :to_ask)
     end
 
     # find random unanswered question for user
@@ -144,7 +146,7 @@ class QuestionsController < ApplicationController
         
         # if user has completed all the questions
         if user.completed == 2**total_questions - 1
-            calculate
+            @user_point_total = calculate_user(user)
             render '/layouts/finished'
 
         # user has not yet finished all the questions
@@ -187,6 +189,7 @@ class QuestionsController < ApplicationController
     # calculate all the points accumulated by a given department
     def calculate_all(dept)
         select_dept = User.where(department: dept)
+        # TODO: only select gamified entries
         ret = 0
         select_dept.each do |user|
             ret += calculate_user(user)

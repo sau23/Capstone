@@ -26,7 +26,8 @@ class FeedbacksController < ApplicationController
   # POST /feedbacks
   # POST /feedbacks.json
   def create
-    @feedback = Feedback.new(user_id: @current_user.user_id, experience: params[:experience], future: params[:future], difficulty: params[:difficulty])
+    @feedback = Feedback.new(user_id: @current_user.user_id, is_gamified: @current_user.is_gamified, 
+                experience: params[:experience], future: params[:future], difficulty: params[:difficulty])
 
     respond_to do |format|
       if @feedback.save
@@ -71,6 +72,6 @@ class FeedbacksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def feedback_params
-      params.require(:feedback).permit(:user_id, :feedback)
+      params.require(:feedback).permit(:user_id, :experience, :future, :difficulty)
     end
 end

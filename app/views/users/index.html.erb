@@ -10,7 +10,9 @@
       <th>Gender</th>
       <th>Age</th>
       <th>Department</th>
-      <th>Clinical Year</th>
+      <th>Surgical Specialist?</th>
+      <th>Role</th>
+      <th>Years Worked</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,11 +21,13 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.user_id %></td>
-        <td><%= user.survey_id %></td>
+        <td><%= user.is_gamified %></td>
         <td><%= user.gender %></td>
         <td><%= user.age %></td>
         <td><%= user.department %></td>
-        <td><%= user.clinical_year %></td>
+        <td><%= user.is_surgical_specialist %></td>
+        <td><%= user.role %></td>
+        <td><%= user.years_worked %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -35,8 +39,8 @@
 
 <%= form_with(model: @user, local: true) do |form| %>
     <div class="field">
-        <%= form.label :survey_id %>
-        <%= form.check_box :survey_id %>
+        <%= form.label :is_gamified %>
+        <%= form.check_box :is_gamified %>
     </div>
     
     <%= hidden_field_tag 'completed', -1 %>

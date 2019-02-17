@@ -38,15 +38,42 @@
   </div>
 
   <div class="field">
-    <%= form.label :clinical_year %>
-    <%= form.select :clinical_year, 
+    <%= form.label :is_surgical_specialist %>
+    <%= form.select :is_surgical_specialist, 
         [
-            'PGY1', 
-            'PGY2',
-            'PGY3', 
-            'PGY4', 
-            'PGY5', 
-            'Attending'
+            'Yes', 
+            'No', 
+            'N/A'
+        ], 
+        :include_blank => 'Please Select an Option' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :role %>
+    <%= form.select :role, 
+        [
+            'Attending', 
+            'Fellow', 
+            'Resident', 
+            'Intern', 
+            'Physician Assistant', 
+            'Nurse', 
+            'Respiratory Therapist', 
+            'Other' 
+        ], 
+        :include_blank => 'Please Select an Option' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :years_worked %>
+    <%= form.select :years_worked, 
+        [
+            '<1', 
+            '1-2', 
+            '3-5', 
+            '5-10', 
+            '10-20', 
+            '20+' 
         ], 
         :include_blank => 'Please Select an Option' %>
   </div>

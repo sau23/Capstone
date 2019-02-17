@@ -10,14 +10,18 @@
 <table>
     <tr>
         <th><%= sortable "question_id" %></th>
-        <th><%= sortable "response" %></th>
         <th><%= sortable "user_id" %></th>
+        <th><%= sortable "is_gamified" %></th>
+        <th><%= sortable "selection" %></th>
+        <th><%= sortable "response_text" %></th>
     </tr>
-    <% @responses_g.each do |response1| %>
+    <% @responses.each do |response| %>
     <tr>
-        <td><%= response1.question_id + 1 %></td>
-        <td><%= response1.response %></td>
-        <td><%= response1.user_id %></td>
+        <td><%= response.question_id + 1 %></td>
+        <td><%= response.user_id %></td>
+        <td><%= response.is_gamified %></td>
+        <td><%= response.selection %></td>
+        <td><%= response.response_text %></td>
     </tr>
     <% end %>
 </table>

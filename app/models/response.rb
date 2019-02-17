@@ -1,3 +1,3 @@
 class Response < ApplicationRecord
-    validates :response, presence: true
+    validates :selection, presence: true
 end

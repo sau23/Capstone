@@ -59,8 +59,8 @@ class UsersController < ApplicationController
 
         # make a new user if submitting form
         if params[:completed].to_i < 0
-            user = User.new(user_id: make_user, survey_id: params[:user][:survey_id], gender: "",
-                    age: 0, department: "", clinical_year: "", completed: 0)
+            user = User.new(user_id: make_user, is_gamified: params[:user][:is_gamified], gender: "",
+                    age: 0, department: "", is_surgical_specialist: "", role: "", years_worked: "", completed: 0)
             user.save(:validate => false)
             flash[:success]
             redirect_to :users, notice: 'User ' + user.user_id + ' created'
@@ -79,8 +79,6 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to :root, notice: 'User was sucessfully updated' }
-        #format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        #format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -110,7 +108,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:user_id, :gender, :age, :department, :clinical_year)
+      params.require(:user).permit(:user_id, :gender, :age, :department, :is_surgical_specialist, :role, :years_worked)
     end
 
     # create new random user string

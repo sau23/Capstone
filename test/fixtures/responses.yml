@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  survey_id: false
+  is_gamified: false
   question_id: 1
-  user_id: MyString
-  response: 1
+  user_id: MyText
+  selection: 1
   response_text: MyText
 
 two:
-  survey_id: false
+  is_gamified: false
   question_id: 1
-  user_id: MyString
-  response: 1
+  user_id: MyText
+  selection: 1
   response_text: MyText

@@ -10,16 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_13_031901) do
+ActiveRecord::Schema.define(version: 2019_02_17_090155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "feedbacks", force: :cascade do |t|
     t.text "user_id"
+    t.boolean "is_gamified"
     t.integer "experience"
-    t.integer "future"
     t.integer "difficulty"
+    t.integer "future"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -30,16 +31,15 @@ ActiveRecord::Schema.define(version: 2019_02_13_031901) do
     t.text "option_1"
     t.text "option_2"
     t.text "option_3"
-    t.text "option_4"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "responses", force: :cascade do |t|
-    t.boolean "survey_id"
+    t.boolean "is_gamified"
     t.integer "question_id"
-    t.string "user_id"
-    t.integer "response"
+    t.text "user_id"
+    t.integer "selection"
     t.text "response_text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -47,11 +47,13 @@ ActiveRecord::Schema.define(version: 2019_02_13_031901) do
 
   create_table "users", force: :cascade do |t|
     t.text "user_id"
-    t.boolean "survey_id"
-    t.text "gender"
+    t.boolean "is_gamified"
     t.integer "age"
+    t.text "gender"
     t.text "department"
-    t.text "clinical_year"
+    t.text "is_surgical_specialist"
+    t.text "role"
+    t.text "years_worked"
     t.integer "completed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -2,12 +2,14 @@
 
 one:
   user_id: MyText
+  is_gamified: false
   experience: 1
-  future: 1
   difficulty: 1
+  future: 1
 
 two:
   user_id: MyText
+  is_gamified: false
   experience: 1
-  future: 1
   difficulty: 1
+  future: 1

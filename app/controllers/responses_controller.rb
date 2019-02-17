@@ -8,8 +8,9 @@ class ResponsesController < ApplicationController
   def index
     @users = User.all
     @questions = Question.all
-    @responses_g = Response.where(survey_id: "true").order(sort_column + ' ' + sort_direction)
-    @responses_n = Response.where(survey_id: "false").order(sort_column + ' ' + sort_direction)
+    @responses = Response.all
+    #@responses_g = Response.where(is_gamified: "true").order(sort_column + ' ' + sort_direction)
+    #@responses_n = Response.where(is_gamified: "false").order(sort_column + ' ' + sort_direction)
     @feedbacks = Feedback.all
   end
 
@@ -77,7 +78,7 @@ class ResponsesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def response_params
-      params.require(:response).permit(:question_id, :user_id, :response, :response_text)
+      params.require(:response).permit(:question_id, :user_id, :selection, :response_text)
     end
 
     # table sorting helpers

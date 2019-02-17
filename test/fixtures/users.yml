@@ -2,18 +2,22 @@
 
 one:
   user_id: MyText
-  survey_id: false
-  gender: MyText
+  is_gamified: false
   age: 1
+  gender: MyText
   department: MyText
-  clinical_year: MyText
+  is_surgical_specialist: MyText
+  role: 
+  years_worked: MyText
   completed: 1
 
 two:
   user_id: MyText
-  survey_id: false
-  gender: MyText
+  is_gamified: false
   age: 1
+  gender: MyText
   department: MyText
-  clinical_year: MyText
+  is_surgical_specialist: MyText
+  role: 
+  years_worked: MyText
   completed: 1

@@ -10,7 +10,6 @@
       <th>Option 1</th>
       <th>Option 2</th>
       <th>Option 3</th>
-      <th>Option 4</th>
       <th colspan="5"></th>
     </tr>
   </thead>
@@ -23,7 +22,6 @@
         <td><%= question.option_1 %></td>
         <td><%= question.option_2 %></td>
         <td><%= question.option_3 %></td>
-        <td><%= question.option_4 %></td>
         <td><%= link_to 'Show', question %></td>
         <td><%= link_to 'Edit', edit_question_path(question) %></td>
         <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -71,11 +69,6 @@
     <div class="field">
         <%= form.label :option_3 %>
         <%= form.text_area :option_3 %>
-    </div>
-
-    <div class="field">
-        <%= form.label :option_4 %>
-        <%= form.text_area :option_4 %>
     </div>
 
     <%= hidden_field_tag 'new', 1 %>

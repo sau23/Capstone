@@ -8,7 +8,6 @@ class CreateQuestions < ActiveRecord::Migration[5.2]
       t.text :option_1
       t.text :option_2
       t.text :option_3
-      t.text :option_4
 
       t.timestamps
     end
