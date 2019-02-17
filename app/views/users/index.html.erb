@@ -5,14 +5,15 @@
 <table>
   <thead>
     <tr>
-      <th>User</th>
-      <th>Gamified?</th>
-      <th>Gender</th>
-      <th>Age</th>
-      <th>Department</th>
-      <th>Surgical Specialist?</th>
-      <th>Role</th>
-      <th>Years Worked</th>
+      <th><%= sortable "id", User %></th>
+      <th><%= sortable "user_id", User %></th>
+      <th><%= sortable "is_gamified", User %></th>
+      <th><%= sortable "gender", User %></th>
+      <th><%= sortable "age", User %></th>
+      <th><%= sortable "department", User %></th>
+      <th><%= sortable "is_surgical_specialist", User %></th>
+      <th><%= sortable "role", User %></th>
+      <th><%= sortable "years_worked", User %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= user.id %></td>
         <td><%= user.user_id %></td>
         <td><%= user.is_gamified %></td>
         <td><%= user.gender %></td>

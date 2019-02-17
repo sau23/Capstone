@@ -38,9 +38,10 @@
 <table>
     <thead>
         <tr>
-            <th>Experience</th>
-            <th>Future</th>
-            <th>Difficulty</th>
+            <th><%= sortable "experience", Feedback %></th>
+            <th><%= sortable "future", Feedback %></th>
+            <th><%= sortable "difficulty", Feedback %></th>
+            <th><%= sortable "created_at", Feedback %></th>
         </tr>
     </thead>
 
@@ -50,6 +51,7 @@
                 <td><%= feedback.experience %></td>
                 <td><%= feedback.future %></td>
                 <td><%= feedback.difficulty %></td>
+                <td><%= feedback.created_at %></td>
             </tr>
         <% end %>
     </tbody>

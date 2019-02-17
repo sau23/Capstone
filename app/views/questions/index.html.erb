@@ -5,12 +5,12 @@
 <table>
   <thead>
     <tr>
-      <th>Question ID</th>
-      <th>Question</th>
-      <th>Option 1</th>
-      <th>Option 2</th>
-      <th>Option 3</th>
-      <th colspan="5"></th>
+      <th><%= sortable "question_id", Question %></th>
+      <th><%= sortable "to_ask", Question %></th>
+      <th><%= sortable "option_1", Question %></th>
+      <th><%= sortable "option_2", Question %></th>
+      <th><%= sortable "option_3", Question %></th>
+      <th colspan="3"></th>
     </tr>
   </thead>
 

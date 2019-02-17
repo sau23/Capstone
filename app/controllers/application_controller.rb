@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+    include SortableColumns
     skip_before_action :verify_authenticity_token
     before_action :current_user
 

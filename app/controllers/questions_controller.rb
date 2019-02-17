@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    @questions = Question.all.order(sort_column(Question) + ' ' + sort_direction)
     @question = Question.new
   end
 

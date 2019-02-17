@@ -1,17 +1,11 @@
 class ResponsesController < ApplicationController
   before_action :set_response, only: [:show, :edit, :update, :destroy]
   before_action :admin?
-  helper_method :sort_column, :sort_direction
 
   # GET /responses
   # GET /responses.json
   def index
-    @users = User.all
-    @questions = Question.all
-    @responses = Response.all
-    #@responses_g = Response.where(is_gamified: "true").order(sort_column + ' ' + sort_direction)
-    #@responses_n = Response.where(is_gamified: "false").order(sort_column + ' ' + sort_direction)
-    @feedbacks = Feedback.all
+    @responses = Response.all.order(sort_column(Response) + ' ' + sort_direction)
   end
 
   # GET /responses/1
@@ -32,18 +26,17 @@ class ResponsesController < ApplicationController
   # POST /responses.json
   def create
 
-#    @response = Response.new(response_params)
-#
-#    respond_to do |format|
-#      if @response.save
-#        format.html { redirect_to @response, notice: 'Response was successfully created.' }
-#        format.json { render :show, status: :created, location: @response }
-#      else
-#        format.html { render :new }
-#        format.json { render json: @response.errors, status: :unprocessable_entity }
-#      end
-#    end
+    @response = Response.new(response_params)
 
+    respond_to do |format|
+      if @response.save
+        format.html { redirect_to @response, notice: 'Response was successfully created.' }
+        format.json { render :show, status: :created, location: @response }
+      else
+        format.html { render :new }
+        format.json { render json: @response.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /responses/1
@@ -81,12 +74,4 @@ class ResponsesController < ApplicationController
       params.require(:response).permit(:question_id, :user_id, :selection, :response_text)
     end
 
-    # table sorting helpers
-    def sort_column
-        Response.column_names.include?(params[:sort]) ? params[:sort] : "question_id"
-    end
-
-    def sort_direction
-        %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-    end
 end

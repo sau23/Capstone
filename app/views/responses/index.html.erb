@@ -9,11 +9,11 @@
 
 <table>
     <tr>
-        <th><%= sortable "question_id" %></th>
-        <th><%= sortable "user_id" %></th>
-        <th><%= sortable "is_gamified" %></th>
-        <th><%= sortable "selection" %></th>
-        <th><%= sortable "response_text" %></th>
+        <th><%= sortable "question_id", Response %></th>
+        <th><%= sortable "user_id", Response %></th>
+        <th><%= sortable "is_gamified", Response %></th>
+        <th><%= sortable "selection", Response %></th>
+        <th><%= sortable "response_text", Response %></th>
     </tr>
     <% @responses.each do |response| %>
     <tr>

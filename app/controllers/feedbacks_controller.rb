@@ -6,7 +6,7 @@ class FeedbacksController < ApplicationController
   # GET /feedbacks
   # GET /feedbacks.json
   def index
-    @feedbacks = Feedback.all
+    @feedbacks = Feedback.all.order(sort_column(Feedback) + ' ' + sort_direction)
   end
 
   # GET /feedbacks/1

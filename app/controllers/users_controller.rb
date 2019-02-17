@@ -7,14 +7,15 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.all.order(sort_column(User) + ' ' + sort_direction)
     @user = User.new
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    @feedbacks = Feedback.where(user_id: @user.user_id)
+    fb = Feedback.where(user_id: @user.user_id)
+    @feedbacks = fb.order(sort_column(Feedback) + ' ' + sort_direction)
   end
 
   # GET /users/new
