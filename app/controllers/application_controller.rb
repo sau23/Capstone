@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
     # log out user
     def log_out
         if session[:user_id]
-            flash[:sucess] = 'You have been logged out'
+            flash[:success] = 'You have been logged out'
         end
         session.delete(:user_id)
         session.delete(:admin)

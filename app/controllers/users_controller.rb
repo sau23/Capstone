@@ -47,10 +47,12 @@ class UsersController < ApplicationController
 
         # user has not completed anything
         elsif user.completed == 0
+            flash.discard
             redirect_to '/questions/instructions'
 
         # user has completed something
         else
+            flash.discard
             redirect_to '/questions/survey'
         end
 
@@ -62,7 +64,6 @@ class UsersController < ApplicationController
             user = User.new(user_id: make_user, is_gamified: params[:user][:is_gamified], gender: "",
                     age: 0, department: "", is_surgical_specialist: "", role: "", years_worked: "", completed: 0)
             user.save(:validate => false)
-            flash[:success]
             redirect_to :users, notice: 'User ' + user.user_id + ' created'
         
         # attempt to login the user from login page
