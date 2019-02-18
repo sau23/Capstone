@@ -32,7 +32,7 @@ class FeedbacksController < ApplicationController
 
     respond_to do |format|
       if @feedback.save
-        format.html { redirect_to :root, notice: 'Feedback received.' }
+        format.html { redirect_to :root, notice: 'Thank you for participating in our survey.' }
         format.js
       else
         format.html { render :new }

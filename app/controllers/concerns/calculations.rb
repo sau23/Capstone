@@ -8,6 +8,7 @@ module Calculations
         # if user has completed all the questions
         if user.completed == 2**total_questions - 1
             @user_point_total = calculate_user(user)
+
             redirect_to :new_optional
 
         # user has not yet finished all the questions
