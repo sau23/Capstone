@@ -6,6 +6,7 @@
 
 <% if @current_user.is_gamified %>
 Your point total is: <%= @user_point_total %>
+<%= column_chart [["Emergency Department", @ed_point_total],["Intensive Care Unit", @icu_point_total]] %>
 <% end %>
 
 <form action="/questions#create", method="POST">
@@ -23,7 +24,7 @@ Your point total is: <%= @user_point_total %>
         <input type="radio" name="selection" value="3">
         <%= @question.option_3 %>
     </p>
-    <p><textarea name="response_text" maxlength="255" rows="5"></textarea></p>
+    <p><textarea name="response_text" maxlength="500" rows="5"></textarea></p>
     <p><input type="submit" value="Continue"></p>
 
 </form>

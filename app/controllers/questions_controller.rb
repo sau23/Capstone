@@ -126,6 +126,10 @@ class QuestionsController < ApplicationController
     # calculate point totals for the user
     @user_point_total = calculate_user(@current_user)
 
+    # calculate point totals for each team
+    @ed_point_total = calculate_all("Emergency Department")
+    @icu_point_total = calculate_all("Intensive Care Unit")
+
     # set the question for the user
     @question = Question.find_by(question_id: next_question)
 
