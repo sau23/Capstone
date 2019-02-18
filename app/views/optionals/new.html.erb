@@ -2,5 +2,8 @@ You have finished the survey.<br>
 <% if @current_user.is_gamified %>
 You earned <%= @user_point_total %> points.<br>
 <% end %>
+<% if !@has_responded %>
 Comments, questions, concerns?<br><br>
 <%= render 'form', optional: @optional %>
+<% end %>
+<%= link_to "Return to Login", :root %>

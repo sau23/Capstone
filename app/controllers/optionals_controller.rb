@@ -18,10 +18,11 @@ class OptionalsController < ApplicationController
 
   # GET /optionals/new
   def new
-    if @current_user.completed != 2**(Question.all.count - 1)
+    if @current_user.completed != 2**Question.all.count - 1
         flash[:danger] = 'Please complete the survey first'
         redirect_to :root and return
     end
+    @has_responded = Optional.where(user_id: @current_user.user_id).count > 0
     @user_point_total = calculate_user(@current_user)
     @optional = Optional.new
   end
@@ -40,9 +41,8 @@ class OptionalsController < ApplicationController
         @optional.save
     end
 
-    # redirect to login for logout
-    flash[:a] = 'Thank you for participating in our survey'
-    redirect_to :root
+    # redirect to results
+    redirect_to :new_optional
 
   end
 
