@@ -1,0 +1,6 @@
+You have finished the survey.<br>
+<% if @current_user.is_gamified %>
+You earned <%= @user_point_total %> points.<br>
+<% end %>
+Comments, questions, concerns?<br><br>
+<%= render 'form', optional: @optional %>

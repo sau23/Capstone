@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Optionals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= sortable "user_id", Optional %></th>
+      <th><%= sortable "is_gamified", Optional %></th>
+      <th><%= sortable "response", Optional %></th>
+      <th><%= sortable "created_at", Optional %></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @optionals.each do |optional| %>
+      <tr>
+        <td><%= optional.user_id %></td>
+        <td><%= optional.is_gamified %></td>
+        <td><%= optional.response %></td>
+        <td><%= optional.created_at %></td>
+        <td><%= link_to 'Show', optional %></td>
+        <td><%= link_to 'Destroy', optional, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Back', :responses %>

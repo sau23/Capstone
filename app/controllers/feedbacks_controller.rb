@@ -1,6 +1,7 @@
 class FeedbacksController < ApplicationController
   before_action :set_feedback, only: [:show, :edit, :update, :destroy]
   before_action :logged_in?, only: [:new, :create]
+  before_action :credentials?, only: [:new, :create]
   before_action :admin?, except: [:new, :create]
 
   # GET /feedbacks
@@ -31,7 +32,7 @@ class FeedbacksController < ApplicationController
 
     respond_to do |format|
       if @feedback.save
-        format.html { redirect_to :root, notice: 'Feedback was successfully created.' }
+        format.html { redirect_to :root, notice: 'Feedback received.' }
         format.js
       else
         format.html { render :new }

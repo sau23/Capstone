@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_17_090155) do
+ActiveRecord::Schema.define(version: 2019_02_17_223421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,20 @@ ActiveRecord::Schema.define(version: 2019_02_17_090155) do
     t.integer "experience"
     t.integer "difficulty"
     t.integer "future"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "optionals", force: :cascade do |t|
+    t.text "user_id"
+    t.boolean "is_gamified"
+    t.text "response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.text "op_feedback"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

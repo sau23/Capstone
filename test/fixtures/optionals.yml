@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: MyText
+  is_gamified: false
+  response: MyText
+
+two:
+  user_id: MyText
+  is_gamified: false
+  response: MyText

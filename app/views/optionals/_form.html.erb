@@ -1,0 +1,10 @@
+<%= form_with(model: optional, local: true) do |form| %>
+
+  <div class="field">
+    <%= form.text_area :response %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Return to Login Page" %>
+  </div>
+<% end %>

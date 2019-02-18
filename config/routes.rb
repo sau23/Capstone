@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'questions/survey'
   get 'users/login'
   root 'users#login'
+  resources :optionals
   resources :feedbacks
   resources :questions
   resources :responses

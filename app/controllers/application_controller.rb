@@ -23,6 +23,14 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    # check if credentials are filled
+    def credentials?
+        if @current_user.gender.empty?
+            flash[:danger] = 'Please fill out your credentials before continuing'
+            redirect_to :root
+        end
+    end
+
     # check if admin
     def admin?
         if !session[:admin]
