@@ -25,8 +25,9 @@ module Calculations
                         pos += 1
                     end
                 else
-                    pos = total_questions - 1
-                    b = user.completed.to_s(2).reverse!.to_i(2)
+                    pos = total_questions
+                    c = user.completed.to_s(2)
+                    b = ("1" + ("0" * (total_questions - c.length)) + c).reverse!.to_i(2)
                     while (b & 1) == 1
                         b >>= 1
                         pos -= 1
