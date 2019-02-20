@@ -1,6 +1,5 @@
 class CreateResponses < ActiveRecord::Migration[5.2]
   def change
-    drop_table :responses
 
     create_table :responses do |t|
       t.boolean :is_gamified
