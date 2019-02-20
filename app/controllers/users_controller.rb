@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   def create
 
     # if admin account
-    if params[:user_id].eql? "admin"
+    if params[:user_id].eql? ENV["ADMIN"]
         session[:admin] = true
         redirect_to :responses
 
