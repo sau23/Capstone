@@ -66,7 +66,7 @@ class UsersController < ApplicationController
                     age: 0, department: "", is_surgical_specialist: "", role: "", years_worked: "", completed: 0)
             user.save(:validate => false)
             redirect_to :users, notice: 'User ' + user.user_id + ' created'
-        
+
         # attempt to login the user from login page
         else
             flash[:danger] = 'User does not exist'
@@ -80,7 +80,8 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to :root, notice: 'User was sucessfully updated' }
+        log_in @user
+        format.html { redirect_to '/questions/instructions' }
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
