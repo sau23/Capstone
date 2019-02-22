@@ -36,8 +36,8 @@ class OptionalsController < ApplicationController
   def create
 
     # only save if the user input anything
-    if !params[:optional][:response].empty?
-        @optional = Optional.new(user_id: @current_user.user_id, is_gamified: @current_user.is_gamified, response: params[:optional][:response])
+    if !params[:response].empty?
+        @optional = Optional.new(user_id: @current_user.user_id, is_gamified: @current_user.is_gamified, response: params[:response])
         @optional.save
     end
 

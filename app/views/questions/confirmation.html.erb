@@ -4,6 +4,7 @@ Are you sure?
 <br>You currently have <%= @user_point_total %> points.
 <br>Your team currently has <%= @team_point_total %> points in total.
 <%= pie_chart [["Emergency Department", @ed_point_total], ["Intensive Care Unit", @icu_point_total]], 
+    colors: ["blue", "green"], 
     library: {pieSliceText: "value-and-percentage"} %>
 <% end %>
 

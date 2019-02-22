@@ -1,8 +1,6 @@
 <%= form_with(model: optional, local: true) do |form| %>
 
-  <div class="field">
-    <%= form.text_area :response, maxlength: 1000 %>
-  </div>
+  <p><textarea name="response" maxlength="1000" rows="5" placeholder="Character limit 1000"></textarea></p>
 
   <div class="actions">
     <%= form.submit "Submit" %>
