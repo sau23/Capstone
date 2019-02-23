@@ -56,5 +56,25 @@
         <% end %>
     </tbody>
 </table>
+<br>
+<table>
+    <thead>
+        <tr>
+            <th>Question ID</th>
+            <th>Response</th>
+            <th>Time Submitted</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @responses.each do |response| %>
+            <tr>
+                <td><%= response.question_id %></td>
+                <td style="word-break:break-all;"><%= response.response_text %></td>
+                <td><%= response.created_at %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
 
 <%= link_to 'Back', users_path %>

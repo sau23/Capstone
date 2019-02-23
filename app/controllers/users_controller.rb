@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   def show
     fb = Feedback.where(user_id: @user.user_id)
     @feedbacks = fb.order(sort_column(Feedback) + ' ' + sort_direction)
+    @responses = Response.where(user_id: @user.user_id).order("question_id")
   end
 
   # GET /users/new
