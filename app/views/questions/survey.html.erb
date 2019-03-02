@@ -1,38 +1,80 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+<div class="column side">
+    <div class="flex-container">
+        <% if @current_user.is_gamified %>
+            <%= @user_point_total %>
+            <!-- TODO: Add image -->
+            <% if @current_user.department.eql?("Emergency Department") %>
+                <%= @ed_point_total %>
+            <% else %>
+                <%= @icu_point_total %>
+            <% end %>
+        <% else %>
+            &nbsp
+        <% end %>
+    </div>
 
-<% flash.each do |key,value| %>
-    <div class="alert alert-<%= key %>"><%= value %></div>
-<% end %>
+    <div class="text-left">
+        <%= link_to 'View Instructions', '/questions/instructions' %>
+    </div>
+</div>
 
-<% if @current_user.is_gamified %>
-Your point total is: <%= @user_point_total %>
-<%= column_chart [{"name" => "Emergency Department", "data" => {"Department" => @ed_point_total}}, 
-        {"name" => "Intensive Care Unit", "data" => {"Department" => @icu_point_total}}],
-        colors: ["blue", "green"] %>
-<% end %>
-
-<form action="/questions#create", method="POST">
-
-    <p><%= @question.to_ask %></p>
-    <p>
-        <input type="radio" name="selection" value="1">
-        <%= @question.option_1 %>
-    </p>
-    <p>
-        <input type="radio" name="selection" value="2">
-        <%= @question.option_2 %>
-    </p>
-    <p>
-        <input type="radio" name="selection" value="3">
-        <%= @question.option_3 %>
-    </p>
-    <p><textarea name="response_text" maxlength="500" rows="5" placeholder="Character limit 500"></textarea></p>
-    <p><input type="submit" value="Continue"></p>
-
+<div class="column middle">
+    <form action="/questions#create", method="POST">
+    <div class="response">
+        <div class="row">
+            <div class="container">
+                <div class="container-border">
+                    <div class="container-size-lg">
+                        <div class="question">
+                            <p><%= @question.to_ask %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="container-border">
+                    <div class="container-size-sm">
+                        <ol>
+                            <li><input type="radio" name="selection" value="1">
+                            <%= @question.option_1 %></li>
+                            <li><input type="radio" name="selection" value="2">
+                            <%= @question.option_2 %></li>
+                            <li><input type="radio" name="selection" value="3">
+                            <%= @question.option_3 %></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="container-border">
+                    <div class="container-size-sm">
+                        <textarea name="response_text" maxlength="500" placeholder="Character limit 500"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex-container">
+            <p><input type="submit" value="Continue"></p>
+        </div>
+    </div>
 </form>
+</div>
 
-<br>
-
-<%= link_to 'View Instructions', '/questions/instructions' %><br>
-<%= link_to 'Save and Exit', '/questions/confirmation' %>
-
+<div class="column side">
+    <% if @current_user.is_gamified %>
+        <!-- TODO: Add images -->
+        <div class="flex-container">
+            <div class="graph">
+                <%= column_chart [{"name" => "Emergency Department", "data" => {"Department" => @ed_point_total}}, 
+                    {"name" => "Intensive Care Unit", "data" => {"Department" => @icu_point_total}}],
+                    colors: ["blue", "green"], legend: "bottom" %>
+            </div>
+        </div>
+    <% end %>
+    <div class="text-right">
+        <%= link_to 'Save and Exit', '/questions/confirmation' %>
+    </div>
+</div>

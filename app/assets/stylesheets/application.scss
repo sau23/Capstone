@@ -1,0 +1,181 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* Default Classes */
+
+.form-control {
+  width: 200px;
+  text-align: center;
+}
+
+.column {
+  float: left;
+  padding: 10px;
+}
+
+.col-md-8 {
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;  
+}
+
+.col-md-4 {
+  text-align: right;
+  width: 50%;
+}
+
+.column.side {
+  height: 600px;
+  width: 25%;
+  padding: 0px;
+}
+
+.column.middle {
+  height: 600px;
+  width: 50%;
+  padding-top: 0px;
+}
+
+.row {
+  display: flex;
+  padding: 0px;
+}
+
+.container {
+  width: 100%;
+  padding: 0px;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+}
+
+.full-width {
+  line-height: 50px;
+  height: 50px;
+  font-size: 20pt;
+  background-color: #e22424;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.form-group {
+  text-align: left;
+}
+
+.form-actions {
+  padding: 20px;
+  margin: 0;
+  background-color: transparent;
+  text-align: center;
+}
+
+.alert {
+  padding: 20px;
+  float: none;
+  margin: 0 auto;
+  width: 200px;
+  text-align: center;
+}
+
+.th, td {
+  width: 130px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* User-Defined */
+
+.center {
+  float: none;
+  margin: 0 auto;
+}
+
+.vertical-center {
+  margin: 0;
+  top: 50%;
+}
+
+.flex-container-vertical {
+  flex-direction: column;
+}
+
+.container-border {
+  border-style: groove;
+}
+
+.container-text {
+  width: 600px;
+  word-wrap: break-word;
+}
+
+.container-size-lg {
+  height: 394px;
+  width: 100%;
+}
+
+.container-size-sm {
+  height: 194px;
+  width: 100%;
+}
+
+.user-edit {
+  position: absolute;
+  top: 175px;
+  width: 50%;
+}
+
+.response textarea {
+  display: flex;
+  width: 100%;
+  height: 100%;  
+}
+
+.optional textarea {
+  display: flex;
+  height: 100px;
+  width: 100%;
+}
+
+.text-left {
+  position: absolute;
+  top: 650px;
+  left: 5px;
+  text-align: left;
+}
+
+.text-right {
+  position: absolute;
+  top: 650px;
+  right: 5px;
+  text-align: right;
+}
+
+.text-center {
+  float: center;
+}
+
+.overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.question {
+  margin: 10px;
+}
+
+.graph {
+  width: 95%;
+}
+
+.confirmation {
+  direction: column;
+  text-align: center;
+}

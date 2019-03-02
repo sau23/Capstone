@@ -1,24 +1,14 @@
+<div class="text-center">
 <%= form_with(model: feedback, local: true) do |form| %>
-  <% if feedback.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(feedback.errors.count, "error") %> prohibited this feedback from being saved:</h2>
-
-      <ul>
-      <% feedback.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <br>How would you rate your experience?<br>
+  <h2>How would you rate your experience?</h2>
+  <div class="flex-container">
   <table>
     <tr>
-      <td><%= label_tag(:experience_1, "1") %></td>
-      <td><%= label_tag(:experience_2, "2") %></td>
-      <td><%= label_tag(:experience_3, "3") %></td>
-      <td><%= label_tag(:experience_4, "4") %></td>
-      <td><%= label_tag(:experience_5, "5") %></td>
+      <td><%= label_tag(:experience_1, "Very Unenjoyable") %></td>
+      <td><%= label_tag(:experience_2, "Unenjoyable") %></td>
+      <td><%= label_tag(:experience_3, "Can't Say") %></td>
+      <td><%= label_tag(:experience_4, "Enjoyable") %></td>
+      <td><%= label_tag(:experience_5, "Very Enjoyable") %></td>
     </tr>
     <tr>
       <td><%= radio_button_tag(:experience, "1") %></td>
@@ -28,15 +18,17 @@
       <td><%= radio_button_tag(:experience, "5") %></td>
     </tr>
   </table>
+  </div>
 
-  <br>Would you be more willing to partake in surveys like this in the future?<br>
+  <h2>Would you be more willing to partake in surveys like this in the future?</h2>
+  <div class="flex-container">
   <table>
     <tr>
-      <td><%= label_tag(:future_1, "1") %></td>
-      <td><%= label_tag(:future_2, "2") %></td>
-      <td><%= label_tag(:future_3, "3") %></td>
-      <td><%= label_tag(:future_4, "4") %></td>
-      <td><%= label_tag(:future_5, "5") %></td>
+      <td><%= label_tag(:future_1, "Very Unlikely") %></td>
+      <td><%= label_tag(:future_2, "Unlikely") %></td>
+      <td><%= label_tag(:future_3, "Can't Say") %></td>
+      <td><%= label_tag(:future_4, "Likely") %></td>
+      <td><%= label_tag(:future_5, "Very Likely") %></td>
     </tr>
     <tr>
       <td><%= radio_button_tag(:future, "1") %></td>
@@ -46,15 +38,17 @@
       <td><%= radio_button_tag(:future, "5") %></td>
     </tr>
   </table>
+  </div>
 
-  <br>How difficult did you find this survey?<br>
+  <h2>How difficult did you find this survey?</h2>
+  <div class="flex-container">
   <table>
     <tr>
-      <td><%= label_tag(:difficulty_1, "1") %></td>
-      <td><%= label_tag(:difficulty_2, "2") %></td>
-      <td><%= label_tag(:difficulty_3, "3") %></td>
-      <td><%= label_tag(:difficulty_4, "4") %></td>
-      <td><%= label_tag(:difficulty_5, "5") %></td>
+      <td><%= label_tag(:difficulty_1, "Very Easy") %></td>
+      <td><%= label_tag(:difficulty_2, "Easy") %></td>
+      <td><%= label_tag(:difficulty_3, "Can't Say") %></td>
+      <td><%= label_tag(:difficulty_4, "Hard") %></td>
+      <td><%= label_tag(:difficulty_5, "Very Hard") %></td>
     </tr>
     <tr>
       <td><%= radio_button_tag(:difficulty, "1") %></td>
@@ -64,10 +58,17 @@
       <td><%= radio_button_tag(:difficulty, "5") %></td>
     </tr>
   </table>
-
+  </div>
   <br>
 
   <div class="actions">
     <%= form.submit "Submit Feedback" %>
   </div>
+<% end %>
+</div>
+
+<% if feedback.errors.any? %>
+    <div class="text-center">
+        <br>Please answer all questions before submitting.
+    </div>
 <% end %>

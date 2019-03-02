@@ -1,5 +1,39 @@
-This is the instructions page.
+<div class="row">
+    <div class="column side">
+        <% if @current_user.is_gamified %>
+            <!-- TODO: Add image of points -->
+            <div class="container">
+                This displays your current score as well as your department's score.
+            </div>
+        <% end %>
 
-<br>
+        <div class="text-left">
+            <%= link_to "Continue", '/questions/survey' %>
+        </div>
+    </div>
 
-<%= link_to "Continue", '/questions/survey' %>
+    <div class="column middle">
+        <% if @current_user.is_gamified %>
+            <div class="container">
+                <div class="question">
+                    This is the instructions page for a gamified user.
+                </div>
+            </div>
+        <% else %>
+            <div class="container">
+                <div class="question">
+                    This is the instructions page for a normal user.
+                </div>
+            </div>
+        <% end %>
+    </div>
+
+    <div class="column side">
+        <% if @current_user.is_gamified %>
+            <!-- TODO: Add image of graph -->
+            <div class="container">
+                This graph displays both departments' scores.
+            </div>
+        <% end %>
+    </div>
+</div>

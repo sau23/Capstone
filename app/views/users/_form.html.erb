@@ -1,84 +1,153 @@
-<%= form_with(model: user, local: true) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="column side">
+    <div class="text-left">
+        <%= link_to "Back", :root %>
     </div>
-  <% end %>
+</div>
+<div class="column middle">
 
-  <div class="field">
-    <%= form.label :gender %>
-    <%= form.select :gender, 
-        [
-            'M', 
-            'F', 
-            'Other'
-        ], 
-        :include_blank => 'Please Select an Option' %>
-  </div>
+<h3 class="text-center">Please provide your information to continue.</h3>
+<h4 class="text-center">You cannot change this in the future.</h4>
 
-  <div class="field">
-    <%= form.label :age %>
-    <%= form.number_field :age %>
-  </div>
-
-  <div class="field">
-    <%= form.label :department %>
-    <%= form.select :department, 
-        [
-            'Emergency Department', 
-            'Intensive Care Unit'
-        ], 
-        :include_blank => 'Please Select an Option' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :is_surgical_specialist %>
-    <%= form.select :is_surgical_specialist, 
-        [
-            'Yes', 
-            'No', 
-            'N/A'
-        ], 
-        :include_blank => 'Please Select an Option' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :role %>
-    <%= form.select :role, 
-        [
-            'Attending', 
-            'Fellow', 
-            'Resident', 
-            'Intern', 
-            'Physician Assistant', 
-            'Nurse', 
-            'Respiratory Therapist', 
-            'Other' 
-        ], 
-        :include_blank => 'Please Select an Option' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :years_worked %>
-    <%= form.select :years_worked, 
-        [
-            '<1', 
-            '1-2', 
-            '3-5', 
-            '5-10', 
-            '10-20', 
-            '20+' 
-        ], 
-        :include_blank => 'Please Select an Option' %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Submit User" %>
-  </div>
+<div class="user-edit">
+<%= form_with(model: user, local: true) do |form| %>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="overflow"><%= form.label :gender, "What gender do you identify as?" %></div>
+        </div>
+        <div class="col-md-4">
+            <%= form.select :gender, 
+                [
+                    'M', 
+                    'F', 
+                    'Other'
+                ], 
+                :include_blank => "Please Select an Option" %>
+        </div>
+        <div class="col-md-4">
+            <% if user.errors[:gender].any? %>
+                <div class="overflow"><p class="text-center">Must be selected</p></div>
+            <% else %>
+                &nbsp
+            <% end %>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="overflow"><%= form.label :age, "How old are you? (20-99)" %></div>
+        </div>
+        <div class="col-md-4">
+            <%= form.number_field :age %>
+        </div>
+        <div class="col-md-4">
+            <% if user.errors[:age].any? %>
+                <div class="overflow"><p class="text-center">Must be in range</p></div>
+            <% else %>
+                &nbsp
+            <% end %>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="overflow"><%= form.label :department, "What department do you work in?" %></div>
+        </div>
+        <div class="col-md-4">
+            <%= form.select :department, 
+                [
+                    'Emergency Department', 
+                    'Intensive Care Unit'
+                ], 
+                :include_blank => 'Please Select an Option' %>
+        </div>
+        <div class="col-md-4">
+            <% if user.errors[:department].any? %>
+                <div class="overflow"><p class="text-center">Must be selected</p></div>
+            <% else %>
+                &nbsp
+            <% end %>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="overflow"><%= form.label :is_surgical_specialist, "If you are a physician, are you a surgical specialist?" %></div>
+        </div>
+        <div class="col-md-4">
+            <%= form.select :is_surgical_specialist, 
+                [
+                    'Yes', 
+                    'No', 
+                    'N/A'
+                ], 
+                :include_blank => 'Please Select an Option' %>
+        </div>
+        <div class="col-md-4">
+            <% if user.errors[:is_surgical_specialist].any? %>
+                <div class="overflow"><p class="text-center">Must be selected</p></div>
+            <% else %>
+                &nbsp
+            <% end %>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="overflow"><%= form.label :role, "What is your role?" %></div>
+        </div>
+        <div class="col-md-4">
+            <%= form.select :role, 
+                [
+                    'Attending', 
+                    'Fellow', 
+                    'Resident', 
+                    'Intern', 
+                    'Physician Assistant', 
+                    'Nurse', 
+                    'Respiratory Therapist', 
+                    'Other' 
+                ], 
+                :include_blank => 'Please Select an Option' %>
+        </div>
+        <div class="col-md-4">
+            <% if user.errors[:role].any? %>
+                <div class="overflow"><p class="text-center">Must be selected</p></div>
+            <% else %>
+                &nbsp
+            <% end %>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="overflow"><%= form.label :years_worked, "How many years have you worked in your profession?" %></div>
+        </div>
+        <div class="col-md-4">
+            <%= form.select :years_worked, 
+                [
+                    'Less than 1', 
+                    'Between 1 to 2', 
+                    'Between 3 to 5', 
+                    'Between 5 to 10', 
+                    'Between 10 to 20', 
+                    'More than 20' 
+                ], 
+                :include_blank => 'Please Select an Option' %>
+        </div>
+        <div class="col-md-4">
+            <% if user.errors[:years_worked].any? %>
+                <div class="overflow"><p class="text-center">Must be selected</p></div>
+            <% else %>
+                &nbsp
+            <% end %>
+        </div>
+    </div>
+    <div class="flex-container">
+        <div class="form-actions">
+            <%= form.submit "Submit" %>
+        </div>
+    </div>
 <% end %>
+</div>
+</div>
+<div class="column side"></div>

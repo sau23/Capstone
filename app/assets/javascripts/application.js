@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require chartkick
+//= require bootstrap-sprockets
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks

@@ -1,8 +1,41 @@
-<%= form_with(model: optional, local: true) do |form| %>
-
-  <p><textarea name="response" maxlength="1000" rows="5" placeholder="Character limit 1000"></textarea></p>
-
-  <div class="actions">
-    <%= form.submit "Submit" %>
-  </div>
+<h3 class="text-center">You have finished the survey.</h3>
+<% if @current_user.is_gamified %>
+    <h4 class="text-center">You earned <%= @user_point_total %> points.</h4>
 <% end %>
+
+<div class="row">
+    <div class="column side"></div>
+    <div class="column middle">
+        <div class="optional">
+            <div class="flex-container">
+                <div class="container-text">
+                    You have completed the survey. This box will be filled with other stuff later.
+                    Upon exiting, you will be automatically logged out.
+                </div>
+            </div>
+            <br>
+            <% if @has_responseded %>
+                <div class="flex-container">
+                    <div class="container-text">
+                        Please feel free to leave any comments, questions, or concerns in the box below.
+                        This will not affect your response.
+                    </div>
+                </div>
+                <%= form_with(model: optional, local: true) do |form| %>
+                <div class="flex-container">
+                    <div class="container">
+                        <textarea name="response" maxlength="1000" rows="5" placeholder="Character limit 1000"></textarea>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <%= form.submit "Submit" %>
+                </div>
+                <% end %>
+            <% end %>
+            <div class="text-center">
+                <%= link_to 'Exit', :new_feedback %>
+            </div>
+        </div>
+    </div>
+    <div class="column side"></div>
+</div>

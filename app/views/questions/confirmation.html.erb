@@ -1,13 +1,36 @@
-Are you sure?
+<h3 class="text-center">Are you sure you want to exit?</h3>
+
+<div class="text-center">
+   <p><%= link_to 'Return', '/questions/survey' %> &nbsp <%= link_to 'Exit', :new_feedback %></p>
+</div>
 
 <% if @current_user.is_gamified %>
-<br>You currently have <%= @user_point_total %> points.
-<br>Your team currently has <%= @team_point_total %> points in total.
-<%= pie_chart [["Emergency Department", @ed_point_total], ["Intensive Care Unit", @icu_point_total]], 
-    colors: ["blue", "green"], 
-    library: {pieSliceText: "value-and-percentage"} %>
+    <div class="row">
+        <div class="column side">
+            <div class="flex-container">
+                <div class="confirmation">
+                    <h2>Your points:</h2>
+                    <h1><%= @user_point_total %></h1>
+                </div>
+            </div>
+        </div>
+        <div class="column middle">
+            <div class="flex-container">
+                <div class="confirmation">
+                    <h2>Your department's points:</h2>
+                    <h1><%= @team_point_total %></h1>
+                </div>
+            </div>
+            <%= pie_chart [["Emergency Department", @ed_point_total], ["Intensive Care Unit", @icu_point_total]], 
+                colors: ["blue", "green"], 
+                library: {pieSliceText: "value-and-percentage"} %>
+        </div>
+        <div class="column-side">
+            <div class="flex-container">
+                <div class="confirmation">
+                    <!-- TODO: Add patient image -->
+                </div>
+            </div>
+        </div>
+    </div>
 <% end %>
-
-<br><%= link_to 'Return', '/questions/survey' %>
-<br><%= link_to 'Exit', :new_feedback %>
-
