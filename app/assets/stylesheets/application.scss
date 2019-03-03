@@ -83,11 +83,13 @@
   text-align: center;
 }
 
+.table {
+  table-layout: auto;
+  word-break: break-word;
+}
+
 .th, td {
   width: 130px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 /* User-Defined */

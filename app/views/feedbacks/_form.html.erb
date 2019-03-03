@@ -1,12 +1,12 @@
 <div class="text-center">
 <%= form_with(model: feedback, local: true) do |form| %>
-  <h2>How would you rate your experience?</h2>
+  <h3>How would you rate your experience?</h3>
   <div class="flex-container">
   <table>
     <tr>
       <td><%= label_tag(:experience_1, "Very Unenjoyable") %></td>
       <td><%= label_tag(:experience_2, "Unenjoyable") %></td>
-      <td><%= label_tag(:experience_3, "Can't Say") %></td>
+      <td><%= label_tag(:experience_3, "Neutral") %></td>
       <td><%= label_tag(:experience_4, "Enjoyable") %></td>
       <td><%= label_tag(:experience_5, "Very Enjoyable") %></td>
     </tr>
@@ -20,13 +20,13 @@
   </table>
   </div>
 
-  <h2>Would you be more willing to partake in surveys like this in the future?</h2>
+  <h3>Would you be more willing to partake in surveys like this in the future?</h3>
   <div class="flex-container">
   <table>
     <tr>
       <td><%= label_tag(:future_1, "Very Unlikely") %></td>
       <td><%= label_tag(:future_2, "Unlikely") %></td>
-      <td><%= label_tag(:future_3, "Can't Say") %></td>
+      <td><%= label_tag(:future_3, "Neutral") %></td>
       <td><%= label_tag(:future_4, "Likely") %></td>
       <td><%= label_tag(:future_5, "Very Likely") %></td>
     </tr>
@@ -40,13 +40,13 @@
   </table>
   </div>
 
-  <h2>How difficult did you find this survey?</h2>
+  <h3>How difficult did you find this survey?</h3>
   <div class="flex-container">
   <table>
     <tr>
       <td><%= label_tag(:difficulty_1, "Very Easy") %></td>
       <td><%= label_tag(:difficulty_2, "Easy") %></td>
-      <td><%= label_tag(:difficulty_3, "Can't Say") %></td>
+      <td><%= label_tag(:difficulty_3, "Neutral") %></td>
       <td><%= label_tag(:difficulty_4, "Hard") %></td>
       <td><%= label_tag(:difficulty_5, "Very Hard") %></td>
     </tr>

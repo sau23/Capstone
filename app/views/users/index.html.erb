@@ -2,10 +2,9 @@
 
 <h1>Users</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th><%= sortable "id", User %></th>
       <th><%= sortable "user_id", User %></th>
       <th><%= sortable "is_gamified", User %></th>
       <th><%= sortable "gender", User %></th>
@@ -21,7 +20,6 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.id %></td>
         <td><%= user.user_id %></td>
         <td><%= user.is_gamified %></td>
         <td><%= user.gender %></td>
@@ -39,17 +37,23 @@
 
 <br>
 
-<%= form_with(model: @user, local: true) do |form| %>
-    <div class="field">
-        <%= form.label :is_gamified %>
-        <%= form.check_box :is_gamified %>
-    </div>
+<p class="text-center">Make a new random user by setting whether or not it will be a gamified account:</p>
+
+<div class="flex-container">
+    <%= form_with(model: @user, local: true) do |form| %>
+        <div class="text-center">
+            <div class="field">
+                <%= form.label :is_gamified, "Gamified user?" %><br>
+                <%= form.check_box :is_gamified %>
+            </div>
+        </div>
     
-    <%= hidden_field_tag 'completed', -1 %>
-
-    <div class="actions">
-        <%= form.submit %>
-    </div>
-<% end %>
-
+        <%= hidden_field_tag 'completed', -1 %>
+        <br>
+        <div class="actions">
+            <%= form.submit %>
+        </div>
+    <% end %>
+</div>
+<br>
 <%= link_to 'Back', :responses %>

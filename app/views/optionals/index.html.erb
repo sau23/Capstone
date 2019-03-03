@@ -2,7 +2,8 @@
 
 <h1>Optionals</h1>
 
-<table>
+
+<table class="table">
   <thead>
     <tr>
       <th><%= sortable "user_id", Optional %></th>
@@ -18,7 +19,7 @@
       <tr>
         <td><%= optional.user_id %></td>
         <td><%= optional.is_gamified %></td>
-        <td style="word-break:break-all;"><%= optional.response %></td>
+        <td><%= optional.response %></td>
         <td><%= optional.created_at %></td>
         <td><%= link_to 'Destroy', optional, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
