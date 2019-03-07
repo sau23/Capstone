@@ -1,9 +1,24 @@
 <div class="row">
     <div class="column side">
         <% if @current_user.is_gamified %>
-            <!-- TODO: Add image of points -->
-            <div class="container">
-                This displays your current score as well as your department's score.
+            <div class="flex-container">
+                <% if @current_user.department.eql?("Emergency Department") %>
+                    <div class="margin-lg">
+                        8 current points
+                    </div>
+                    <%= image_tag "ER_Avatar.png", :size => "60x100" %> 
+                    <p>16 department points</p>
+                <% else %>
+                    <div class="margin-lg">
+                        8 current points
+                    </div>
+                    <%= image_tag "Internal_Department_Avatar.png", :size => "60x100" %> 
+                    <p>10 department points</p>
+                <% end %>
+            </div>
+            <br>
+            <div class="question">
+                <p class="text-center">This section shows your current score as well as your department's score.</p>
             </div>
         <% end %>
 
@@ -30,9 +45,24 @@
 
     <div class="column side">
         <% if @current_user.is_gamified %>
-            <!-- TODO: Add image of graph -->
-            <div class="container">
-                This graph displays both departments' scores.
+            <div class="flex-container">
+                <%= image_tag "Patient_4.png", :size => "190" %>
+            </div>
+            <div class="flex-container">
+                <div class="avatar-margin">
+                    <%= image_tag "ER_Avatar.png", :size => "60x100" %>
+                </div>
+                <div class="avatar-margin">
+                    <%= image_tag "Internal_Department_Avatar.png", :size => "60x100" %>
+                </div>
+            </div>
+            <br><br>
+            <div class="flex-container">
+                <%= image_tag "graphexample.png" %>
+            </div>
+            <br>
+            <div class="question">
+                <p class="text-center">This section displays the patient's current state as well as both departments' scores.</p>
             </div>
         <% end %>
     </div>

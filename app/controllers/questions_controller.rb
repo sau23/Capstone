@@ -111,6 +111,9 @@ class QuestionsController < ApplicationController
     @icu_point_total = calculate_all("Intensive Care Unit")
     @team_point_total = @current_user.department.eql?("Emergency Department") ? @ed_point_total : @icu_point_total
 
+    # variables for displaying patient state
+    @question_total = Question.all.count.to_f
+    @patient_state = calculate_user_q(@current_user) / @question_total
   end
 
   # GET /questions/instructions
@@ -132,6 +135,10 @@ class QuestionsController < ApplicationController
 
     # set the question for the user
     @question = Question.find_by(question_id: next_question)
+
+    # variables for displaying patient state
+    @question_total = Question.all.count.to_f
+    @patient_state = calculate_user_q(@current_user) / @question_total
 
   end
 

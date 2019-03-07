@@ -43,10 +43,15 @@ module Calculations
         end
     end
 
-    # calculate how many points a given user currently has
+    # calculate how many questions the user has answered
+    def calculate_user_q(user)
+        user.completed.to_s(2).scan(/1/).count
+    end
+
+    # calculate how many points gained in total a given user currently has
     def calculate_user(user)
         user_responses = Response.where(user_id: user.user_id)
-        (user_responses.where("length(response_text) >= 40").count + user.completed.to_s(2).scan(/1/).count) * 2
+        (user_responses.where("length(response_text) >= 40").count + calculate_user_q(user)) * 2
     end
 
     # calculate all the points accumulated by a given department
