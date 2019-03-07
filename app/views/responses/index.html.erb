@@ -10,20 +10,27 @@
 </p>
 
 <table class="table">
-    <tr>
-        <th><%= sortable "question_id", Response %></th>
-        <th><%= sortable "user_id", Response %></th>
-        <th><%= sortable "is_gamified", Response %></th>
-        <th><%= sortable "selection", Response %></th>
-    </tr>
-    <% @responses.each do |response| %>
-    <tr>
-        <td><%= response.question_id + 1 %></td>
-        <td><%= response.user_id %></td>
-        <td><%= response.is_gamified %></td>
-        <td><%= response.selection %></td>
-    </tr>
-    <% end %>
+    <thead>
+        <tr>
+            <th><%= sortable "question_id", Response %></th>
+            <th><%= sortable "user_id", Response %></th>
+            <th><%= sortable "is_gamified", Response %></th>
+            <th><%= sortable "selection", Response %></th>
+            <th colspan="3"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @responses.each do |response| %>
+        <tr>
+            <td><%= response.question_id + 1 %></td>
+            <td><%= response.user_id %></td>
+            <td><%= response.is_gamified %></td>
+            <td><%= response.selection %></td>
+            <td><%= link_to 'Destroy', response, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        <% end %>
+    </tbody>
 </table>
 
 <br>
