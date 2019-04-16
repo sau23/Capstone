@@ -55,8 +55,10 @@
         <div class="col-md-4">
             <%= form.select :department, 
                 [
-                    'Emergency Department', 
-                    'Intensive Care Unit'
+                    'Emergency Medicine', 
+                    'Family Medicine',
+                    'General Internal Medicine',
+                    'Pulmonary Critical Care'
                 ], 
                 :include_blank => 'Please Select an Option' %>
         </div>
@@ -81,9 +83,7 @@
                     'Resident', 
                     'Intern', 
                     'Physician Assistant', 
-                    'Nurse', 
-                    'Respiratory Therapist', 
-                    'Other' 
+                    'Advanced Nurse Practitioner'
                 ], 
                 :include_blank => 'Please Select an Option' %>
         </div>
@@ -98,29 +98,7 @@
     <br>
     <div class="row">
         <div class="col-md-8">
-            <div class="overflow"><%= form.label :is_surgical_specialist, "If you are a physician, are you a surgical specialist?" %></div>
-        </div>
-        <div class="col-md-4">
-            <%= form.select :is_surgical_specialist, 
-                [
-                    'Yes', 
-                    'No', 
-                    'N/A'
-                ], 
-                :include_blank => 'Please Select an Option' %>
-        </div>
-        <div class="col-md-4">
-            <% if user.errors[:is_surgical_specialist].any? %>
-                <div class="overflow"><p class="text-center">Must be selected</p></div>
-            <% else %>
-                &nbsp
-            <% end %>
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-md-8">
-            <div class="overflow"><%= form.label :years_worked, "How many years have you worked in your profession?" %></div>
+            <div class="overflow"><%= form.label :years_worked, "How many years have you practiced medicine?" %></div>
         </div>
         <div class="col-md-4">
             <%= form.select :years_worked, 

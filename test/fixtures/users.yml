@@ -6,8 +6,7 @@ one:
   age: 1
   gender: MyText
   department: MyText
-  is_surgical_specialist: MyText
-  role: 
+  role: MyText
   years_worked: MyText
   completed: 1
 
@@ -17,7 +16,6 @@ two:
   age: 1
   gender: MyText
   department: MyText
-  is_surgical_specialist: MyText
-  role: 
+  role: MyText
   years_worked: MyText
   completed: 1
