@@ -8,19 +8,31 @@
     <div class="column middle">
         <div class="optional">
             <div class="flex-container">
+            <div class="flex-container-vertical">
                 <div class="container-text">
-                    You have completed the survey. This box will be filled with other stuff later.
-                    Upon exiting, you will be automatically logged out.
+                    Thank you for completing this survey. The survey has now concluded. If you log-in again, 
+                    you will be brought back to this page. Upon exiting, you will be automatically logged out. 
                 </div>
+
+                <% if @current_user.is_gamified %>
+                    <br>
+                    <div class="container-text">
+                        Once the survey period has concluded and all responses are collected, you will receive 
+                        an email containing the results of the competition.
+                    </div>
+                <% end %>
+            </div>
             </div>
             <br>
             <% if !@has_responded %>
                 <div class="flex-container">
                     <div class="container-text">
                         Please feel free to leave any comments, questions, or concerns in the box below.
-                        This will not affect your response.
+                        This box is optional. It is not part of the study. Once you submit your response, you 
+                        will not be able to submit another response.
                     </div>
                 </div>
+                <br>
                 <%= form_with(model: optional, local: true) do |form| %>
                 <div class="flex-container">
                     <div class="container">

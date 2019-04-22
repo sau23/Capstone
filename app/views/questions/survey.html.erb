@@ -7,16 +7,16 @@
             </div>
             <% if @current_user.department.eql?("Emergency Medicine") %>
                 <%= image_tag "ER_Avatar.png", :size => "60x100" %> 
-                <%= @ed_point_total %>
+                <%= @em_point_total %>
             <% elsif @current_user.department.eql?("Family Medicine") %>
                 <%= image_tag "Family_Doctor_Avatar.png", :size => "60x100" %> 
-                <%= @ed_point_total %>
+                <%= @fm_point_total %>
             <% elsif @current_user.department.eql?("General Internal Medicine") %>
                 <%= image_tag "General_Doctor_Avatar.png", :size => "60x100" %> 
-                <%= @ed_point_total %>
+                <%= @gim_point_total %>
             <% else %>
                 <%= image_tag "Critical_Care_Avatar.png", :size => "60x100" %> 
-                <%= @icu_point_total %>
+                <%= @pcc_point_total %>
             <% end %>
             department points
         <% else %>

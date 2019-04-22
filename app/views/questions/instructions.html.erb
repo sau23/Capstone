@@ -40,16 +40,67 @@
     </div>
 
     <div class="column middle">
+        <h3>
+            <center>
+                <b>Instructions</b>
+            </center>
+        </h3>
         <% if @current_user.is_gamified %>
             <div class="container">
                 <div class="question">
-                    This is the instructions page for a gamified user.
+                    Thank you for participating in this survey. This survey includes a cooperative competition between 
+                    your department and 3 other departments. The goal of the competition is to be the department with 
+                    the greatest number of points. 
+                    <br>
+                    <br>
+                    This survey consists of 5 clinical vignettes. Each vignette is a patient in the Emergency Room 
+                    needing to be triaged. Each vignette will have 3 multiple choice options for where the patient 
+                    should be transferred to. These options will be the same for all vignettes. Each vignette you 
+                    answer will award you and your department a set number of points. Additionally, you may add an 
+                    optional short answer response (500-character limit) to provide more detail to your response. If 
+                    you do add a short answer of at least 40 characters, the points you and your department receive 
+                    will be doubled for that response. Every question you respond to will be recorded.
+                    <br>
+                    <br>
+                    All images on this page are example images to explain what you will see. On the top left side of 
+                    the page you will see from left to right: Your point total, your department avatar, your 
+                    department point total. On the right side of the page you will see from top to bottom: The health 
+                    state of your patient (which improves for each question you answer), and the graph showing the 
+                    point total of all departments. All of this is updated everytime you open a vignette.
+                    <br>
+                    <br>
+                    On each survey question, you may click “View Instructions” to come back to this page, “Continue” 
+                    to move onto the next question, or “Save and Exit” to quit the survey. When you quit the survey, 
+                    you will be asked some brief questions about your experience. You will be brought back to the last 
+                    question you were on if you decide to log-in again.
+                    <br>
+                    <br>
+                    The winning department of this competition will be announced to participants of this survey through 
+                    an email after the survey period has closed. Any unfair methods of gaining points will not count 
+                    towards the post survey point totals.
+                    <br>
+                    <br>
+                    Once you click “Continue” on the bottom left, you will be taken to the survey questions. Once you 
+                    complete the survey, you will not be able to access this page again.
                 </div>
             </div>
         <% else %>
             <div class="container">
                 <div class="question">
-                    This is the instructions page for a normal user.
+                    Thank you for participating in this survey. This survey consists of 5 clinical vignettes. Each
+                    vignette is a patient in the Emergency Room needing to be triaged. Each vignette will have 3
+                    multiple choice options for where the patient should be transferred to. These options will be the
+                    same for all vignettes. Additionally, you may add an optional short answer response (500-
+                    character limit) to provide more detail to your response. Every question you respond to will be
+                    recorded.
+                    <br>
+                    <br>
+                    On each survey question, you may click “View Instructions” to come back to this page,
+                    “Continue” to move onto the next question, or “Save and Exit” to quit the survey. When you quit
+                    the survey, you will be asked some brief questions about your experience. You will be brought
+                    back to the last question you were on if you decide to log-in again.
+                    Once you click “Continue” on the bottom left, you will be taken to the survey questions. Once
+                    you complete the survey, you will not be able to access this page again.
                 </div>
             </div>
         <% end %>
