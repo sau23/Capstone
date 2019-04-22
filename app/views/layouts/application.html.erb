@@ -11,9 +11,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <header>
-    <div class="full-width">
-      Robert Wood Johnson Clinical Vignette Survey
-    </div>
+      <div class="filler">  
+        <%= image_tag "Background.png", :class => "full-width" %>
+        <%= image_tag "Rutgers_Logo.png", :class => "logo" %>
+        <div class="header-text">Robert Wood Johnson Clinical Vignette Survey</div>
+      </div>
   </header>
   <body>
     <%= yield %>
