@@ -4,6 +4,7 @@ class OptionalsController < ApplicationController
   before_action :logged_in?, only: [:new, :create]
   before_action :credentials?, only: [:new, :create]
   before_action :admin?, except: [:new, :create]
+  before_action :set_multiplier, only: [:new]
 
   # GET /optionals
   # GET /optionals.json
@@ -23,7 +24,7 @@ class OptionalsController < ApplicationController
         redirect_to :root and return
     end
     @has_responded = Optional.where(user_id: @current_user.user_id).count > 0
-    @user_point_total = calculate_user(@current_user)
+    @user_point_total = (calculate_user(@current_user) * @multiplier).floor
     @optional = Optional.new
   end
 

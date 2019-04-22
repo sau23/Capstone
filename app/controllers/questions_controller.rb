@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
   before_action :logged_in?, only: [:survey, :instructions, :confirmation]
   before_action :credentials?, only: [:survey, :instructions, :confirmation]
   before_action :admin?, except: [:create, :survey, :instructions, :confirmation]
+  before_action :set_multiplier, only: [:survey, :confirmation]
 
   # GET /questions
   # GET /questions.json
@@ -106,10 +107,21 @@ class QuestionsController < ApplicationController
   def confirmation
 
     # calculate corresponding point totals
-    @user_point_total = calculate_user(@current_user)
-    @ed_point_total = calculate_all("Emergency Department")
-    @icu_point_total = calculate_all("Intensive Care Unit")
-    @team_point_total = @current_user.department.eql?("Emergency Department") ? @ed_point_total : @icu_point_total
+    @user_point_total = (calculate_user(@current_user) * @multiplier).floor
+    @em_point_total = (calculate_all("Emergency Medicine") * 2.4).floor
+    @fm_point_total = (calculate_all("Family Medicine") * 1.7).floor
+    @gim_point_total = calculate_all("General Internal Medicine")
+    @pcc_point_total = (calculate_all("Pulmonary Critical Care") * 6.0).floor
+    @team_point_total = case @current_user.department
+        when "Emergency Medicine"
+            @em_point_total
+        when "Family Medicine"
+            @fm_point_total
+        when "General Internal Medicine"
+            @gim_point_total
+        when "Pulmonary Critical Care"
+            @pcc_point_total
+    end
 
     # variables for displaying patient state
     @question_total = Question.all.count.to_f
@@ -127,11 +139,13 @@ class QuestionsController < ApplicationController
     next_question = cookies.signed[@current_user.user_id] ? cookies.signed[@current_user.user_id] : random(@current_user)
 
     # calculate point totals for the user
-    @user_point_total = calculate_user(@current_user)
+    @user_point_total = (calculate_user(@current_user) * @multiplier).floor
 
     # calculate point totals for each team
-    @ed_point_total = calculate_all("Emergency Department")
-    @icu_point_total = calculate_all("Intensive Care Unit")
+    @em_point_total = (calculate_all("Emergency Medicine") * 2.4).floor
+    @fm_point_total = (calculate_all("Family Medicine") * 1.7).floor
+    @gim_point_total = calculate_all("General Internal Medicine")
+    @pcc_point_total = (calculate_all("Pulmonary Critical Care") * 6.0).floor
 
     # set the question for the user
     @question = Question.find_by(question_id: next_question)

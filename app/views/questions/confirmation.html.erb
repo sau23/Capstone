@@ -21,8 +21,9 @@
                     <h1><%= @team_point_total %></h1>
                 </div>
             </div>
-            <%= pie_chart [["Emergency Department", @ed_point_total], ["Intensive Care Unit", @icu_point_total]], 
-                colors: ["blue", "green"], 
+            <%= pie_chart [["Emergency Medicine", @em_point_total], ["Family Medicine", @fm_point_total],
+                            ["General Internal Medicine", @gim_point_total], ["Pulmonary Critical Care", @pcc_point_total]], 
+                colors: ["blue", "green", "yellow", "red"], 
                 library: {pieSliceText: "value-and-percentage"} %>
         </div>
         <div class="column-side">            

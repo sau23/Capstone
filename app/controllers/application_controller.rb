@@ -48,4 +48,18 @@ class ApplicationController < ActionController::Base
         session.delete(:admin)
         @current_user = nil
     end
+
+    # set user multipler
+    def set_multiplier
+        @multiplier = case @current_user.department
+        when "Emergency Medicine"
+            2.4
+        when "Family Medicine"
+            1.7
+        when "General Internal Medicine"
+            1.0
+        when "Pulmonary Critical Care"
+            6.0
+        end
+    end
 end
