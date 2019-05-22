@@ -90,6 +90,10 @@
 
 /* User-Defined */
 
+.minor-container {
+  width: 95%;
+}
+
 .filler {
   width: 100%;
   background-color: #d21034;
@@ -208,4 +212,9 @@
 .avatar-margin {
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.flex-margin {
+  display: flex;
+  justify-content: space-evenly;
 }

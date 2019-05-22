@@ -88,52 +88,63 @@
                 <%= image_tag "Patient_5.png", :size => "190"%>
             <% end %>
         </div>
-        <div class="flex-container">
-            <div class="avatar-margin">
+        <div class="minor-container">
+        <div class="flex-margin">
                 <%= image_tag "ER_Avatar.png", :size => "45x75" %>
-            </div>
-            <div class="avatar-margin">
                 <%= image_tag "Family_Doctor_Avatar.png", :size => "45x75" %>
-            </div>
-            <div class="avatar-margin">
                 <%= image_tag "General_Doctor_Avatar.png", :size => "45x75" %>
-            </div>
-            <div class="avatar-margin">
                 <%= image_tag "Critical_Care_Avatar.png", :size => "45x75" %>
-            </div>
+        </div>
         </div>
         <div class="flex-container">
              <script type="text/javascript">
+                var chart;
+                var view;
+                var options;
                 google.charts.load("current", {packages:['corechart']});
                 google.charts.setOnLoadCallback(drawChart);
-                    function drawChart() {
-                        var data = google.visualization.arrayToDataTable([
-                            ["Department", "Points", { role: "style" } ],
-                            ["Emergency Medicine", <%= @em_point_total %>, "blue"],
-                            ["Family Medicine", <%= @fm_point_total %>, "green"],
-                            ["General Internal Medicine", <%= @gim_point_total %>, "yellow"],
-                            ["Pulmonary Critical Care", <%= @pcc_point_total %>, "red"]
-                        ]);
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ["Department", "Points", { role: "style" } ],
+                        ["Emergency Medicine", <%= @em_point_total %>, "blue"],
+                        ["Family Medicine", <%= @fm_point_total %>, "green"],
+                        ["General Internal Medicine", <%= @gim_point_total %>, "yellow"],
+                        ["Pulmonary Critical Care", <%= @pcc_point_total %>, "red"]
+                    ]);
                         
-                        var view = new google.visualization.DataView(data);
-                        view.setColumns([0, 1,
-                            {
-                                calc: "stringify",
-                                sourceColumn: 1,
-                                type: "string",
-                                role: "annotation"
-                            },
-                        2]);
-                        
-                        var options = {
-                            bar: {groupWidth: "95%"},
-                            legend: { position: "none" },
-                        };
-                        var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-                        chart.draw(view, options);
+                    view = new google.visualization.DataView(data);
+                    view.setColumns([0, 1,
+                        {
+                            calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation"
+                        },
+                    2]);
+
+                    options = {
+                        bar: { groupWidth: "95%" },
+                        legend: { position: "none" },
+                    };
+                    chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+                    chart.draw(view, options);
                 }
+
+                if(window.attachEvent) {
+                    window.attachEvent('onresize', function() {
+                        chart.draw(view, options);
+                    });
+                } else if(window.addEventListener) {
+                    window.addEventListener('resize', function() {
+                        chart.draw(view, options);
+                    }, true);
+                } else {
+                }
+
             </script>
-            <div id="columnchart_values"></div>
+            <div class="minor-container">
+                <div id="columnchart_values"></div>
+            </div>
         </div>
     <% end %>
     <div class="text-right">
