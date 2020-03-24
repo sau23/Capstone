@@ -61,12 +61,12 @@ class UsersController < ApplicationController
     # user does not exist in database
     else
 
-        # make a new user if submitting form
+        # make a new user if hitting button
         if params[:completed].to_i < 0
-            user = User.new(user_id: make_user, is_gamified: params[:user][:is_gamified], gender: "",
+            user = User.new(user_id: make_user, is_gamified: params[:is_gamified], gender: "",
                     age: 0, department: "", role: "", years_worked: "", completed: 0)
             user.save(:validate => false)
-            redirect_to :users, notice: 'User ' + user.user_id + ' created'
+            redirect_to :root, notice: 'Your user ID is ' + user.user_id
 
         # attempt to login the user from login page
         else
