@@ -157,23 +157,12 @@
                 <br>
                 <div class="container-text">
                     <i>
-                        Generate a code below under your last name's initial (i.e John Doe would generate a code under A-M). This
-                        will provide a unique alphanumeric code to login. Save this code if you would like to login again in the 
-                        future. <u>Please do not generate more than one code for yourself.</u>
+                        Click the button below corresponding to your last name's initial (i.e John Doe would click A-M). This 
+                        will provide a unique user ID to login. Save this user ID if you would like to login again in the future. 
+                        <u>Please do not generate more than one user ID for yourself.</u>
                     </i>
                 </div>
             </div>
-            </div>
-
-            <div class="flex-container">
-                <form action="users#create" method="POST" autocomplete="off">
-                    <div class="form-actions">
-                        <input type="text" name="user_id" class="form-control">
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-default">Login</button><br>
-                    </div>
-                </form>
             </div>
 
             <div class="flex-container">
@@ -194,11 +183,29 @@
             </div>
 
             <div class="flex-container">
-                <div class="flex-container-vertical">
-                    <% flash.each do |key, value| %>
-                        <div class="alert alert-<%= key %>"><%= value %></div>
-                    <% end %>
-                </div>
+                <% if flash.keys.count > 0 %>
+                    <div class="flex-container-vertical">
+                        <% flash.each do |key, value| %>
+                            <div class="alert alert-<%= key %>"><%= value %></div>
+                        <% end %>
+                    </div>
+                <% else %>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                <% end %>
+            </div>
+
+            <div class="flex-container">
+                <form action="users#create" method="POST" autocomplete="off">
+                    <div class="form-actions">
+                        <input type="text" name="user_id" class="form-control">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-default">Login</button><br>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="column side"></div>
