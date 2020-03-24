@@ -218,3 +218,7 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+input::placeholder {
+  font-style: italic;
+}
