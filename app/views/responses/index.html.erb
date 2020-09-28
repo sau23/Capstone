@@ -16,6 +16,7 @@
             <th><%= sortable "user_id", Response %></th>
             <th><%= sortable "is_gamified", Response %></th>
             <th><%= sortable "selection", Response %></th>
+            <th><%= sortable "response_text", Response %></th>
             <th colspan="3"></th>
         </tr>
     </thead>
@@ -27,6 +28,7 @@
             <td><%= response.user_id %></td>
             <td><%= response.is_gamified %></td>
             <td><%= response.selection %></td>
+            <td><%= response.response_text %></td>
             <td><%= link_to 'Destroy', response, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
         <% end %>
